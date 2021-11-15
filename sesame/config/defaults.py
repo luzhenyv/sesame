@@ -417,6 +417,7 @@ _C.SOLVER.STEP_SIZE = 1
 _C.SOLVER.STEPS = []
 
 # Learning rates for 'steps_' policies.
+# e.g. STEPS = [0, 10, 100, 1000], LRS=[1e-2, 5e-2, 1e-1, 1]
 _C.SOLVER.LRS = []
 
 # Maximal number of epochs.
