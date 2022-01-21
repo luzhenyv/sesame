@@ -37,7 +37,7 @@ def train_epoch(
     # Enable train mode.
     model.train()
     train_meter.iter_tic()
-    data_size = len(train_loader)
+    data_size = cfg.TRAIN.STEPS_PER_EPOCH if cfg.TRAIN.STEPS_PER_EPOCH else len(train_loader)
 
     if cfg.MIXUP.ENABLE:
         mixup_fn = MixUp(
@@ -184,6 +184,9 @@ def train_epoch(
         train_meter.log_iter_stats(cur_epoch, cur_iter)
         train_meter.iter_tic()
 
+        if cur_iter > data_size:
+            break
+
     # Log epoch stats.
     train_meter.log_epoch_stats(cur_epoch)
     train_meter.reset()
@@ -207,6 +210,7 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer=None):
     # Evaluation mode enabled. The running stats would not be updated.
     model.eval()
     val_meter.iter_tic()
+    data_size = cfg.TRAIN.VALIDATION_STEPS if cfg.TRAIN.VALIDATION_STEPS else len(val_loader)
 
     for cur_iter, (inputs, labels, _, meta) in enumerate(val_loader):
         if cfg.NUM_GPUS:
@@ -286,6 +290,9 @@ def eval_epoch(val_loader, model, val_meter, cur_epoch, cfg, writer=None):
 
         val_meter.log_iter_stats(cur_epoch, cur_iter)
         val_meter.iter_tic()
+
+        if cur_iter > data_size:
+            break
 
     # Log epoch stats.
     val_meter.log_epoch_stats(cur_epoch)

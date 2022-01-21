@@ -38,7 +38,7 @@ def construct_optimizer(model, cfg):
 
     for name, m in model.named_modules():
         is_bn = isinstance(m, torch.nn.modules.batchnorm._NormBase)
-        for p in m.parameters(rescurse=False):
+        for p in m.parameters(recurse=False):
             if not p.requires_grad:
                 no_grad_parameters.append(p)
             elif is_bn:

@@ -169,13 +169,13 @@ class TrainMeter(object):
             "dt_net": self.net_timer.seconds(),
             "eta": eta,
             "loss": self.loss.get_win_median(),
-            "lr": self.lr,
+            "lr": "{:.2e}".format(self.lr),
             "gpu_mem": "{:.2f}G".format(misc.gpu_mem_usage()),
         }
         if not self._cfg.DATA.MULTI_LABEL:
             stats["top1_err"] = self.mb_top1_err.get_win_median()
             stats["top5_err"] = self.mb_top5_err.get_win_median()
-        log.log_json_stats(stats)
+        logger.log_json_stats(stats)
 
     def log_epoch_stats(self, cur_epoch):
         """
@@ -194,7 +194,7 @@ class TrainMeter(object):
             "dt_data": self.data_timer.seconds(),
             "dt_net": self.net_timer.seconds(),
             "eta": eta,
-            "lr": self.lr,
+            "lr": "{:.2e}".format(self.lr),
             "gpu_mem": "{:.2f}G".format(misc.gpu_mem_usage()),
             "RAM": "{:.2f}/{:.2f}G".format(*misc.cpu_mem_usage()),
         }
@@ -205,7 +205,7 @@ class TrainMeter(object):
             stats["top1_err"] = top1_err
             stats["top5_err"] = top5_err
             stats["loss"] = avg_loss
-        log.log_json_stats(stats)
+        logger.log_json_stats(stats)
 
 
 class ValMeter(object):
@@ -316,7 +316,7 @@ class ValMeter(object):
         if not self._cfg.DATA.MULTI_LABEL:
             stats["top1_err"] = self.mb_top1_err.get_win_median()
             stats["top5_err"] = self.mb_top5_err.get_win_median()
-        log.log_json_stats(stats)
+        logger.log_json_stats(stats)
 
     def log_epoch_stats(self, cur_epoch):
         """
@@ -347,7 +347,7 @@ class ValMeter(object):
             stats["min_top1_err"] = self.min_top1_err
             stats["min_top5_err"] = self.min_top5_err
 
-        log.log_json_stats(stats)
+        logger.log_json_stats(stats)
 
 
 class TestMeter(object):
@@ -465,7 +465,7 @@ class TestMeter(object):
             "eta": eta,
             "time_diff": self.iter_timer.seconds(),
         }
-        log.log_json_stats(stats)
+        logger.log_json_stats(stats)
 
     def iter_tic(self):
         """
@@ -522,7 +522,7 @@ class TestMeter(object):
                 self.stats["top{}_acc".format(k)] = "{:.{prec}f}".format(
                     topk, prec=2
                 )
-        log.log_json_stats(self.stats)
+        logger.log_json_stats(self.stats)
 
 
 def get_map(preds, labels):
@@ -550,3 +550,58 @@ def get_map(preds, labels):
 
     mean_ap = np.mean(aps)
     return mean_ap
+
+
+class EpochTimer:
+    """
+    A timer which computes the epoch time.
+    """
+
+    def __init__(self) -> None:
+        self.timer = Timer()
+        self.timer.reset()
+        self.epoch_times = []
+
+    def reset(self) -> None:
+        """
+        Reset the epoch timer.
+        """
+        self.timer.reset()
+        self.epoch_times = []
+
+    def epoch_tic(self):
+        """
+        Start to record time.
+        """
+        self.timer.reset()
+
+    def epoch_toc(self):
+        """
+        Stop to record time.
+        """
+        self.timer.pause()
+        self.epoch_times.append(self.timer.seconds())
+
+    def last_epoch_time(self):
+        """
+        Get the time for the last epoch.
+        """
+        assert len(self.epoch_times) > 0, "No epoch time has been recorded!"
+
+        return self.epoch_times[-1]
+
+    def avg_epoch_time(self):
+        """
+        Calculate the average epoch time among the recorded epochs.
+        """
+        assert len(self.epoch_times) > 0, "No epoch time has been recorded!"
+
+        return np.mean(self.epoch_times)
+
+    def median_epoch_time(self):
+        """
+        Calculate the median epoch time among the recorded epochs.
+        """
+        assert len(self.epoch_times) > 0, "No epoch time has been recorded!"
+
+        return np.median(self.epoch_times)

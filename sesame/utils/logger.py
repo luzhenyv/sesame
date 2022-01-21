@@ -1,6 +1,6 @@
 import os
 import sys
-import json
+import simplejson
 import builtins
 import decimal
 import logging
@@ -76,6 +76,6 @@ def log_json_stats(stats):
         k: decimal.Decimal("{:.5f}".format(v)) if isinstance(v, float) else v
         for k, v in stats.items()
     }
-    json_stats = json.dumps(stats, sort_keys=True, use_decimal=True)
+    json_stats = simplejson.dumps(stats, sort_keys=True, use_decimal=True)
     logger = get_logger(__name__)
     logger.info("json_stats: {:s}".format(json_stats))

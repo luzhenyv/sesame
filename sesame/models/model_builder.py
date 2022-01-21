@@ -107,9 +107,7 @@ class MViT(nn.Module):
         stride_kv = [[] for i in range(cfg.MVIT.DEPTH)]
 
         for i in range(len(cfg.MVIT.POOL_Q_STRIDE)):
-            stride_q[cfg.MVIT.POOL_Q_STRIDE[i][0]] = cfg.MVIT.POOL_Q_STRIDE[i][
-                                                     1:
-                                                     ]
+            stride_q[cfg.MVIT.POOL_Q_STRIDE[i][0]] = cfg.MVIT.POOL_Q_STRIDE[i][1:]
             if cfg.MVIT.POOL_KVQ_KERNEL is not None:
                 pool_q[cfg.MVIT.POOL_Q_STRIDE[i][0]] = cfg.MVIT.POOL_KVQ_KERNEL
             else:
@@ -130,9 +128,7 @@ class MViT(nn.Module):
                 cfg.MVIT.POOL_KV_STRIDE.append([i] + _stride_kv)
 
         for i in range(len(cfg.MVIT.POOL_KV_STRIDE)):
-            stride_kv[cfg.MVIT.POOL_KV_STRIDE[i][0]] = cfg.MVIT.POOL_KV_STRIDE[
-                                                           i
-                                                       ][1:]
+            stride_kv[cfg.MVIT.POOL_KV_STRIDE[i][0]] = cfg.MVIT.POOL_KV_STRIDE[i][1:]
             if cfg.MVIT.POOL_KVQ_KERNEL is not None:
                 pool_kv[
                     cfg.MVIT.POOL_KV_STRIDE[i][0]
@@ -154,7 +150,6 @@ class MViT(nn.Module):
                 embed_dim,
                 dim_mul[i + 1],
                 divisor=round_width(num_heads, head_mul[i + 1]),
-                verbose=True
             )
             attention_block = MultiScaleBlock(
                 dim=embed_dim,
@@ -229,7 +224,7 @@ class MViT(nn.Module):
             return {}
 
     def forward(self, x):
-        # x = x[0]
+        x = x[0]
         x = self.patch_embed(x)
 
         T = self.cfg.DATA.NUM_FRAMES // self.patch_stride[0]

@@ -15,7 +15,8 @@ _C.BN = CfgNode()
 
 # Weight decay value that applies on BN.
 _C.BN.WEIGHT_DECAY = 0.0
-
+_C.BN.USE_PRECISE_STATS = False
+_C.BN.NUM_BATCHES_PRECISE = 200
 # ---------------------------------------------------------------------------- #
 # Training options.
 # ---------------------------------------------------------------------------- #
@@ -35,6 +36,14 @@ _C.TRAIN.EVAL_PERIOD = 10
 
 # Save model checkpoint every checkpoint period epochs.
 _C.TRAIN.CHECKPOINT_PERIOD = 10
+
+# Integer or None. Total number of steps (batches of samples) before
+# declaring one epoch finished and starting the next epoch.
+_C.TRAIN.STEPS_PER_EPOCH = None
+
+# Total number of steps (batches of samples) to draw
+# before stopping when performing validation at the end of every epoch.
+_C.TRAIN.VALIDATION_STEPS = None
 
 # Resume training from the latest checkpoint in the output directory.
 _C.TRAIN.AUTO_RESUME = True
