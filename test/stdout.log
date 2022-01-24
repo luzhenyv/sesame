@@ -4103,3 +4103,842 @@
 [01/18 14:47:47][INFO] logger.py:  81: json_stats: {"_type": "train_iter", "dt": 3.98781, "dt_data": 3.41229, "dt_net": 0.57551, "epoch": "37/200", "eta": "5 days, 9:13:29", "gpu_mem": "2.16G", "iter": "110/712", "loss": 1.45923, "lr": "9.97e-05", "top1_err": 0.00000, "top5_err": 0.00000}
 [01/18 14:48:24][INFO] logger.py:  81: json_stats: {"_type": "train_iter", "dt": 3.56412, "dt_data": 3.00825, "dt_net": 0.55587, "epoch": "37/200", "eta": "4 days, 19:29:06", "gpu_mem": "2.16G", "iter": "120/712", "loss": 1.45317, "lr": "9.97e-05", "top1_err": 12.50000, "top5_err": 0.00000}
 [01/18 14:48:57][INFO] logger.py:  81: json_stats: {"_type": "train_iter", "dt": 3.16445, "dt_data": 2.58986, "dt_net": 0.57459, "epoch": "37/200", "eta": "4 days, 6:31:35", "gpu_mem": "2.16G", "iter": "130/712", "loss": 1.48662, "lr": "9.97e-05", "top1_err": 0.00000, "top5_err": 0.00000}
+[01/24 13:35:14][DEBUG] diff.py: 282: diff parser start
+[01/24 13:35:14][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 13:35:14][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 13:35:14][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 13:35:14][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 13:35:14][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 13:35:14][DEBUG] diff.py: 339: diff parser end
+[01/24 13:37:38][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 13:37:38][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 13:37:48][DEBUG] diff.py: 282: diff parser start
+[01/24 13:37:48][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 13:37:48][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 13:37:48][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 13:37:48][DEBUG] diff.py: 339: diff parser end
+[01/24 13:37:49][DEBUG] diff.py: 282: diff parser start
+[01/24 13:37:49][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 13:37:49][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 13:37:49][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 13:37:49][DEBUG] diff.py: 339: diff parser end
+[01/24 13:37:49][DEBUG] diff.py: 282: diff parser start
+[01/24 13:37:49][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 13:37:49][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 13:37:49][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 13:37:49][DEBUG] diff.py: 339: diff parser end
+[01/24 13:37:52][DEBUG] diff.py: 282: diff parser start
+[01/24 13:37:52][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 13:37:52][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 13:37:52][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 13:37:52][DEBUG] diff.py: 339: diff parser end
+[01/24 13:37:52][DEBUG] diff.py: 282: diff parser start
+[01/24 13:37:52][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 13:37:52][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 13:37:52][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 13:37:52][DEBUG] diff.py: 339: diff parser end
+[01/24 15:40:42][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 15:40:42][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 15:40:42][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 15:40:42][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 15:40:42][INFO] ava_dataset.py:  98: 706 keyframes used.
+[01/24 15:40:42][INFO] ava_dataset.py: 243: === AVA dataset summary ===
+[01/24 15:40:42][INFO] ava_dataset.py: 244: Split: train
+[01/24 15:41:58][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 15:41:58][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 15:41:58][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 15:41:58][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 15:41:58][INFO] ava_dataset.py:  98: 706 keyframes used.
+[01/24 15:41:58][INFO] ava_dataset.py: 243: === AVA dataset summary ===
+[01/24 15:41:58][INFO] ava_dataset.py: 244: Split: train
+[01/24 15:42:10][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 15:42:10][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 15:42:10][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 15:42:10][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 15:42:10][INFO] ava_dataset.py:  98: 706 keyframes used.
+[01/24 15:42:10][INFO] ava_dataset.py: 243: === AVA dataset summary ===
+[01/24 15:42:10][INFO] ava_dataset.py: 244: Split: train
+[01/24 15:43:33][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 15:43:33][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 15:43:33][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 15:43:33][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 15:43:33][INFO] ava_dataset.py:  98: 706 keyframes used.
+[01/24 15:43:33][INFO] ava_dataset.py: 243: === AVA dataset summary ===
+[01/24 15:43:33][INFO] ava_dataset.py: 244: Split: train
+[01/24 15:43:33][INFO] ava_dataset.py: 245: Number of video: 1
+[01/24 15:43:33][INFO] ava_dataset.py: 250: Number of key frames: 706
+[01/24 15:43:33][INFO] ava_dataset.py: 251: Number of boxes: 1132.
+[01/24 15:50:10][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 15:50:10][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 15:50:10][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 15:50:10][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 15:50:10][INFO] ava_dataset.py:  98: 706 keyframes used.
+[01/24 15:50:10][INFO] ava_dataset.py: 243: === AVA dataset summary ===
+[01/24 15:50:10][INFO] ava_dataset.py: 244: Split: train
+[01/24 15:50:10][INFO] ava_dataset.py: 245: Number of video: 1
+[01/24 15:50:10][INFO] ava_dataset.py: 250: Number of key frames: 706
+[01/24 15:50:10][INFO] ava_dataset.py: 251: Number of boxes: 1132.
+[01/24 15:54:59][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 15:54:59][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 15:55:03][DEBUG] diff.py: 282: diff parser start
+[01/24 15:55:03][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:55:03][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:55:03][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:55:03][DEBUG] diff.py: 339: diff parser end
+[01/24 15:55:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\__init__.py
+[01/24 15:55:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\utils\__init__.py
+[01/24 15:55:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\utils\data\__init__.py
+[01/24 15:55:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\utils\data\dataset.py
+[01/24 15:55:04][DEBUG] diff.py: 282: diff parser start
+[01/24 15:55:04][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:55:04][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:55:04][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:55:04][DEBUG] diff.py: 339: diff parser end
+[01/24 15:55:13][DEBUG] diff.py: 282: diff parser start
+[01/24 15:55:13][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:55:13][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:55:13][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:55:13][DEBUG] diff.py: 339: diff parser end
+[01/24 15:55:13][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 15:55:13][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 15:55:16][DEBUG] diff.py: 282: diff parser start
+[01/24 15:55:16][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:55:16][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:55:16][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:55:16][DEBUG] diff.py: 339: diff parser end
+[01/24 15:55:17][DEBUG] diff.py: 282: diff parser start
+[01/24 15:55:17][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:55:17][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:55:17][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:55:17][DEBUG] diff.py: 339: diff parser end
+[01/24 15:55:17][DEBUG] diff.py: 282: diff parser start
+[01/24 15:55:17][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:55:17][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:55:17][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:55:17][DEBUG] diff.py: 339: diff parser end
+[01/24 15:56:00][DEBUG] diff.py: 282: diff parser start
+[01/24 15:56:00][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 15:56:00][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 15:56:00][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 15:56:00][DEBUG] diff.py: 339: diff parser end
+[01/24 16:12:33][DEBUG] diff.py: 282: diff parser start
+[01/24 16:12:33][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 16:12:33][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 16:12:33][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 16:12:33][DEBUG] diff.py: 339: diff parser end
+[01/24 16:12:39][DEBUG] diff.py: 282: diff parser start
+[01/24 16:12:39][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 16:12:39][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 16:12:39][DEBUG] diff.py: 339: diff parser end
+[01/24 16:12:39][DEBUG] diff.py: 282: diff parser start
+[01/24 16:12:39][DEBUG] diff.py: 293: line_lengths old: 599; new: 631
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[equal] old[1:180] new[1:180]
+[01/24 16:12:39][DEBUG] diff.py: 378: copy old[1:180] new[1:180]
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[insert] old[181:180] new[181:211]
+[01/24 16:12:39][DEBUG] diff.py: 421: parse_part from 181 to 182 (to 182 in part parser)
+[01/24 16:12:39][DEBUG] diff.py: 421: parse_part from 183 to 211 (to 213 in part parser)
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[equal] old[181:545] new[212:576]
+[01/24 16:12:39][DEBUG] diff.py: 378: copy old[183:582] new[212:575]
+[01/24 16:12:39][DEBUG] diff.py: 421: parse_part from 576 to 582 (to 583 in part parser)
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[replace] old[546:550] new[577:582]
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[equal] old[551:599] new[583:631]
+[01/24 16:12:39][DEBUG] diff.py: 378: copy old[552:582] new[583:614]
+[01/24 16:12:39][DEBUG] diff.py: 421: parse_part from 615 to 630 (to 630 in part parser)
+[01/24 16:12:39][DEBUG] diff.py: 339: diff parser end
+[01/24 16:12:39][DEBUG] diff.py: 282: diff parser start
+[01/24 16:12:39][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 16:12:39][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 16:12:39][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 16:12:39][DEBUG] diff.py: 339: diff parser end
+[01/24 16:12:46][DEBUG] diff.py: 282: diff parser start
+[01/24 16:12:46][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 16:12:46][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 16:12:46][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 16:12:46][DEBUG] diff.py: 339: diff parser end
+[01/24 17:19:55][DEBUG] diff.py: 282: diff parser start
+[01/24 17:19:55][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:19:55][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:19:55][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:19:55][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:00][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:00][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:20:00][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:20:00][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:20:00][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:11][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:11][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:20:11][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:20:11][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:20:11][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:11][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:11][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:20:11][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:20:11][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:20:11][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:12][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:12][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:20:12][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:20:12][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:20:12][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:12][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:12][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:20:12][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:20:12][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:20:12][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:34][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:34][DEBUG] diff.py: 293: line_lengths old: 1; new: 4
+[01/24 17:20:34][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:4]
+[01/24 17:20:34][DEBUG] diff.py: 421: parse_part from 1 to 4 (to 3 in part parser)
+[01/24 17:20:34][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:51][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:51][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 17:20:51][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 17:20:51][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 17:20:51][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 17:20:51][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 17:20:51][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:51][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:51][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 17:20:51][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 17:20:51][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 17:20:51][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 17:20:51][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 17:20:51][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:52][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:52][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 17:20:52][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 17:20:52][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 17:20:52][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 17:20:52][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 17:20:52][DEBUG] diff.py: 339: diff parser end
+[01/24 17:20:52][DEBUG] diff.py: 282: diff parser start
+[01/24 17:20:52][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 17:20:52][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 17:20:52][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 17:20:52][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 17:20:52][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 17:20:52][DEBUG] diff.py: 339: diff parser end
+[01/24 17:21:17][DEBUG] diff.py: 282: diff parser start
+[01/24 17:21:17][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 17:21:17][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 17:21:17][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 17:21:17][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 17:21:17][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 17:21:17][DEBUG] diff.py: 339: diff parser end
+[01/24 17:25:55][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 17:25:55][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 17:25:55][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 17:25:55][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 17:27:11][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 17:27:11][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 17:27:11][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 17:27:11][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 17:27:11][INFO] ava_dataset.py: 120: 706 keyframes used.
+[01/24 17:27:37][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 17:27:37][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 17:27:37][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 17:27:37][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 17:27:37][INFO] ava_dataset.py: 120: 706 keyframes used.
+[01/24 17:27:37][INFO] ava_dataset.py: 303: === AVA dataset summary ===
+[01/24 17:27:37][INFO] ava_dataset.py: 304: Split: train
+[01/24 17:27:37][INFO] ava_dataset.py: 305: Number of video: 1
+[01/24 17:27:37][INFO] ava_dataset.py: 310: Number of key frames: 706
+[01/24 17:27:37][INFO] ava_dataset.py: 311: Number of boxes: 1132.
+[01/24 17:27:50][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 17:27:50][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 17:27:54][DEBUG] diff.py: 282: diff parser start
+[01/24 17:27:54][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:27:54][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:27:54][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:27:54][DEBUG] diff.py: 339: diff parser end
+[01/24 17:27:56][DEBUG] diff.py: 282: diff parser start
+[01/24 17:27:56][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:27:56][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:27:56][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:27:56][DEBUG] diff.py: 339: diff parser end
+[01/24 17:27:57][DEBUG] diff.py: 282: diff parser start
+[01/24 17:27:57][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:27:57][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:27:57][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:27:57][DEBUG] diff.py: 339: diff parser end
+[01/24 17:28:02][DEBUG] diff.py: 282: diff parser start
+[01/24 17:28:02][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:28:02][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:28:02][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:28:02][DEBUG] diff.py: 339: diff parser end
+[01/24 17:28:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\__init__.py
+[01/24 17:28:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\utils\__init__.py
+[01/24 17:28:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\utils\data\__init__.py
+[01/24 17:28:03][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\utils\data\dataset.py
+[01/24 17:28:04][DEBUG] diff.py: 282: diff parser start
+[01/24 17:28:04][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:28:04][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:28:04][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:28:04][DEBUG] diff.py: 339: diff parser end
+[01/24 17:28:12][DEBUG] diff.py: 282: diff parser start
+[01/24 17:28:12][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:28:12][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:28:12][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:28:12][DEBUG] diff.py: 339: diff parser end
+[01/24 17:28:15][DEBUG] diff.py: 282: diff parser start
+[01/24 17:28:15][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:28:15][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:28:15][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:28:15][DEBUG] diff.py: 339: diff parser end
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\os.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\os\__init__.pyi
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\posixpath.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\ntpath.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\os\path.pyi
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\functools.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\functools.pyi
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\types.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\types.pyi
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\abc.py
+[01/24 17:28:15][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\abc.pyi
+[01/24 17:28:35][DEBUG] diff.py: 282: diff parser start
+[01/24 17:28:35][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:28:35][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:28:35][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:28:35][DEBUG] diff.py: 339: diff parser end
+[01/24 17:57:58][DEBUG] diff.py: 282: diff parser start
+[01/24 17:57:58][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:57:58][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:57:58][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:57:58][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:03][DEBUG] pyplot.py: 224: Loaded backend module://matplotlib_inline.backend_inline version unknown.
+[01/24 17:58:05][INFO] ava_dataset.py:  47: Finished loading annotations from: %s
+[01/24 17:58:05][INFO] ava_dataset.py:  48: Detection threshold: 0.9
+[01/24 17:58:05][INFO] ava_dataset.py:  49: Number of unique boxes: 1132
+[01/24 17:58:05][INFO] ava_dataset.py:  50: Number of annotations: 3009
+[01/24 17:58:05][INFO] ava_dataset.py: 120: 706 keyframes used.
+[01/24 17:58:05][INFO] ava_dataset.py: 303: === AVA dataset summary ===
+[01/24 17:58:05][INFO] ava_dataset.py: 304: Split: train
+[01/24 17:58:05][INFO] ava_dataset.py: 305: Number of video: 1
+[01/24 17:58:05][INFO] ava_dataset.py: 310: Number of key frames: 706
+[01/24 17:58:05][INFO] ava_dataset.py: 311: Number of boxes: 1132.
+[01/24 17:58:18][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:18][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:18][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:18][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:18][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:21][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:21][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:21][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:21][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:21][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:21][DEBUG] diff.py: 293: line_lengths old: 664; new: 646
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 17:58:21][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[insert] old[2:1] new[2:2]
+[01/24 17:58:21][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 2 in part parser)
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[equal] old[2:3] new[3:4]
+[01/24 17:58:21][DEBUG] diff.py: 378: copy old[2:3] new[3:4]
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[insert] old[4:3] new[5:5]
+[01/24 17:58:21][DEBUG] diff.py: 421: parse_part from 5 to 5 (to 5 in part parser)
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[equal] old[4:204] new[6:206]
+[01/24 17:58:21][DEBUG] diff.py: 378: copy old[4:202] new[6:204]
+[01/24 17:58:21][DEBUG] diff.py: 421: parse_part from 205 to 206 (to 206 in part parser)
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[replace] old[205:233] new[207:239]
+[01/24 17:58:21][DEBUG] diff.py: 421: parse_part from 207 to 239 (to 241 in part parser)
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[equal] old[234:581] new[240:587]
+[01/24 17:58:21][DEBUG] diff.py: 421: parse_part from 240 to 646 (to 645 in part parser)
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[replace] old[582:589] new[588:599]
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[equal] old[590:604] new[600:614]
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[delete] old[605:615] new[615:614]
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[equal] old[616:646] new[615:645]
+[01/24 17:58:21][DEBUG] diff.py: 296: -> code[replace] old[647:664] new[646:646]
+[01/24 17:58:21][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:22][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:22][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:22][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:22][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:22][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:24][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:24][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:24][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:24][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:24][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:26][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:26][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:26][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:26][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:26][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:28][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:28][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:28][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:28][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:28][DEBUG] diff.py: 339: diff parser end
+[01/24 17:58:34][DEBUG] diff.py: 282: diff parser start
+[01/24 17:58:34][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 17:58:34][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 17:58:34][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 17:58:34][DEBUG] diff.py: 339: diff parser end
+[01/24 17:59:15][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 17:59:15][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 17:59:15][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 17:59:15][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 17:59:15][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 17:59:15][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 17:59:15][INFO] ava_dataset.py: 310: Split: train
+[01/24 17:59:15][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 17:59:15][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 17:59:15][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:00:58][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:00:58][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:00:58][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:00:58][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:00:58][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:00:58][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:00:58][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:00:58][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:00:58][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:00:58][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:02:00][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:02:00][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:02:00][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:02:00][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:02:00][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:02:00][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:02:00][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:02:00][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:02:00][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:02:00][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:04:11][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:04:11][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:04:11][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:04:11][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:04:11][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:04:11][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:04:11][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:04:11][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:04:11][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:04:11][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:04:17][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 18:04:17][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 18:04:17][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:17][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:17][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:17][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:17][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:18][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:18][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:18][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:18][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:18][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:18][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:18][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:18][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:18][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:18][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:19][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:19][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:19][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:19][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:19][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:19][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:19][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:19][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:19][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:19][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:19][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:19][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:19][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:19][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:19][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:19][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:19][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:19][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:19][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:19][DEBUG] diff.py: 339: diff parser end
+[01/24 18:04:29][DEBUG] diff.py: 282: diff parser start
+[01/24 18:04:29][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:04:29][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:04:29][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:04:29][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:22][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:22][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:22][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:22][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:22][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:26][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:26][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:26][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:26][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:26][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:26][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 18:11:26][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 18:11:27][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:27][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:27][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:27][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:27][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:28][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:28][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:28][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:28][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:28][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:31][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:31][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:31][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:31][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:31][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:33][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:33][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:33][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:33][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:33][DEBUG] diff.py: 339: diff parser end
+[01/24 18:11:33][DEBUG] diff.py: 282: diff parser start
+[01/24 18:11:33][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:11:33][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:11:33][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:11:33][DEBUG] diff.py: 339: diff parser end
+[01/24 18:12:28][DEBUG] diff.py: 282: diff parser start
+[01/24 18:12:28][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:12:28][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:12:28][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:12:28][DEBUG] diff.py: 339: diff parser end
+[01/24 18:17:05][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:17:05][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:17:05][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:17:05][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:17:05][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:17:05][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:17:05][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:17:05][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:17:05][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:17:05][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:18:47][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 18:18:47][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 18:18:48][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:48][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:18:48][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:18:48][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:18:48][DEBUG] diff.py: 339: diff parser end
+[01/24 18:18:48][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 18:18:48][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 18:18:49][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:49][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:18:49][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:18:49][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:18:49][DEBUG] diff.py: 339: diff parser end
+[01/24 18:18:51][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:51][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:18:51][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:18:51][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:18:51][DEBUG] diff.py: 339: diff parser end
+[01/24 18:18:54][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:54][DEBUG] diff.py: 293: line_lengths old: 1; new: 2
+[01/24 18:18:54][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:2]
+[01/24 18:18:54][DEBUG] diff.py: 421: parse_part from 1 to 2 (to 1 in part parser)
+[01/24 18:18:54][DEBUG] diff.py: 339: diff parser end
+[01/24 18:18:54][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:54][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:18:54][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:18:54][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:18:54][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:18:54][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:18:54][DEBUG] diff.py: 339: diff parser end
+[01/24 18:18:57][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:57][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:18:57][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:18:57][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:18:57][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:18:57][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:18:57][DEBUG] diff.py: 339: diff parser end
+[01/24 18:18:58][DEBUG] diff.py: 282: diff parser start
+[01/24 18:18:58][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:18:58][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:18:58][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:18:58][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:18:58][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:18:58][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:00][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:00][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:19:00][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:00][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:00][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:19:00][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:19:00][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:01][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:01][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:19:01][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:01][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:01][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:19:01][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:19:01][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:08][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:08][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:19:08][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:08][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:08][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:19:08][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:19:08][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:09][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:09][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:19:09][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:09][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:09][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:19:09][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:19:09][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:11][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:11][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:19:11][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:11][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:11][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:19:11][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:19:11][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:12][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:12][DEBUG] diff.py: 293: line_lengths old: 2; new: 2
+[01/24 18:19:12][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:12][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:12][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:2]
+[01/24 18:19:12][DEBUG] diff.py: 421: parse_part from 2 to 2 (to 1 in part parser)
+[01/24 18:19:12][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:30][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:30][DEBUG] diff.py: 293: line_lengths old: 2; new: 3
+[01/24 18:19:30][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:19:30][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:19:30][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:3]
+[01/24 18:19:30][DEBUG] diff.py: 421: parse_part from 2 to 3 (to 2 in part parser)
+[01/24 18:19:30][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:31][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:31][DEBUG] diff.py: 293: line_lengths old: 3; new: 3
+[01/24 18:19:31][DEBUG] diff.py: 296: -> code[equal] old[1:2] new[1:2]
+[01/24 18:19:31][DEBUG] diff.py: 378: copy old[1:2] new[1:2]
+[01/24 18:19:31][DEBUG] diff.py: 296: -> code[replace] old[3:3] new[3:3]
+[01/24 18:19:31][DEBUG] diff.py: 421: parse_part from 3 to 3 (to 2 in part parser)
+[01/24 18:19:31][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:33][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:33][DEBUG] diff.py: 293: line_lengths old: 3; new: 3
+[01/24 18:19:33][DEBUG] diff.py: 296: -> code[equal] old[1:2] new[1:2]
+[01/24 18:19:33][DEBUG] diff.py: 378: copy old[1:2] new[1:2]
+[01/24 18:19:33][DEBUG] diff.py: 296: -> code[replace] old[3:3] new[3:3]
+[01/24 18:19:33][DEBUG] diff.py: 421: parse_part from 3 to 3 (to 2 in part parser)
+[01/24 18:19:33][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:33][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\__init__.py
+[01/24 18:19:35][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:35][DEBUG] diff.py: 293: line_lengths old: 3; new: 3
+[01/24 18:19:35][DEBUG] diff.py: 296: -> code[equal] old[1:2] new[1:2]
+[01/24 18:19:35][DEBUG] diff.py: 378: copy old[1:2] new[1:2]
+[01/24 18:19:35][DEBUG] diff.py: 296: -> code[replace] old[3:3] new[3:3]
+[01/24 18:19:35][DEBUG] diff.py: 421: parse_part from 3 to 3 (to 2 in part parser)
+[01/24 18:19:35][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:35][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:35][DEBUG] diff.py: 293: line_lengths old: 3; new: 3
+[01/24 18:19:35][DEBUG] diff.py: 296: -> code[equal] old[1:2] new[1:2]
+[01/24 18:19:35][DEBUG] diff.py: 378: copy old[1:2] new[1:2]
+[01/24 18:19:35][DEBUG] diff.py: 296: -> code[replace] old[3:3] new[3:3]
+[01/24 18:19:35][DEBUG] diff.py: 421: parse_part from 3 to 3 (to 2 in part parser)
+[01/24 18:19:35][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:35][DEBUG] diff.py: 282: diff parser start
+[01/24 18:19:35][DEBUG] diff.py: 293: line_lengths old: 3; new: 3
+[01/24 18:19:35][DEBUG] diff.py: 296: -> code[equal] old[1:2] new[1:2]
+[01/24 18:19:35][DEBUG] diff.py: 378: copy old[1:2] new[1:2]
+[01/24 18:19:35][DEBUG] diff.py: 296: -> code[replace] old[3:3] new[3:3]
+[01/24 18:19:35][DEBUG] diff.py: 421: parse_part from 3 to 3 (to 2 in part parser)
+[01/24 18:19:35][DEBUG] diff.py: 339: diff parser end
+[01/24 18:19:54][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:19:54][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:19:54][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:19:54][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:19:54][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:19:54][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:19:54][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:19:54][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:19:54][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:19:54][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:20:17][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 18:20:17][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 18:20:17][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:17][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:17][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:17][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:17][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:18][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:18][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:18][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:18][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:18][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:18][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:18][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:18][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:18][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:18][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:21][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:21][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:21][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:21][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:21][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:21][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\torch\__init__.py
+[01/24 18:20:21][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:21][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:21][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:21][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:21][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:22][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:22][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:22][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:22][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:22][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:48][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:48][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:48][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:48][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:48][DEBUG] diff.py: 339: diff parser end
+[01/24 18:20:48][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 18:20:48][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 18:20:49][DEBUG] diff.py: 282: diff parser start
+[01/24 18:20:49][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:20:49][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:20:49][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:20:49][DEBUG] diff.py: 339: diff parser end
+[01/24 18:21:11][DEBUG] diff.py: 282: diff parser start
+[01/24 18:21:11][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:21:11][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:21:11][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:21:11][DEBUG] diff.py: 339: diff parser end
+[01/24 18:22:00][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:22:00][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:22:00][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:22:00][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:22:00][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:22:00][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:22:00][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:22:00][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:22:00][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:22:00][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:22:42][DEBUG] diff.py: 282: diff parser start
+[01/24 18:22:42][DEBUG] diff.py: 293: line_lengths old: 2; new: 4
+[01/24 18:22:42][DEBUG] diff.py: 296: -> code[equal] old[1:1] new[1:1]
+[01/24 18:22:42][DEBUG] diff.py: 378: copy old[1:1] new[1:1]
+[01/24 18:22:42][DEBUG] diff.py: 296: -> code[replace] old[2:2] new[2:4]
+[01/24 18:22:42][DEBUG] diff.py: 421: parse_part from 2 to 4 (to 3 in part parser)
+[01/24 18:22:42][DEBUG] diff.py: 339: diff parser end
+[01/24 18:22:42][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 18:22:42][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 18:22:42][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 18:22:42][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 18:22:42][DEBUG] diff.py: 282: diff parser start
+[01/24 18:22:42][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 18:22:42][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 18:22:42][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 18:22:42][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 18:22:42][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 18:22:42][DEBUG] diff.py: 339: diff parser end
+[01/24 18:22:46][DEBUG] diff.py: 282: diff parser start
+[01/24 18:22:46][DEBUG] diff.py: 293: line_lengths old: 4; new: 4
+[01/24 18:22:46][DEBUG] diff.py: 296: -> code[equal] old[1:3] new[1:3]
+[01/24 18:22:46][DEBUG] diff.py: 378: copy old[1:3] new[1:3]
+[01/24 18:22:46][DEBUG] diff.py: 296: -> code[replace] old[4:4] new[4:4]
+[01/24 18:22:46][DEBUG] diff.py: 421: parse_part from 4 to 4 (to 3 in part parser)
+[01/24 18:22:46][DEBUG] diff.py: 339: diff parser end
+[01/24 18:23:10][DEBUG] pyplot.py: 224: Loaded backend module://matplotlib_inline.backend_inline version unknown.
+[01/24 18:23:11][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:23:11][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:23:11][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:23:11][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:23:11][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:23:11][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:23:11][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:23:11][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:23:11][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:23:11][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:23:24][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:23:24][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:23:24][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:23:24][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:23:24][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:23:24][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:23:24][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:23:24][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:23:24][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:23:24][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:25:26][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:25:26][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:25:26][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:25:26][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:25:26][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:25:26][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:25:26][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:25:26][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:25:26][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:25:26][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:25:47][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:25:47][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:25:47][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:25:47][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:25:47][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:25:47][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:25:47][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:25:47][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:25:47][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:25:47][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:27:02][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:27:02][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:27:02][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:27:02][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:27:02][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:27:02][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:27:02][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:27:02][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:27:02][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:27:02][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:28:13][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:28:13][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:28:13][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:28:13][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:28:13][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:28:13][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:28:13][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:28:13][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:28:13][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:28:13][INFO] ava_dataset.py: 317: Number of boxes: 1132.
+[01/24 18:28:58][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\2and3\builtins.pyi
+[01/24 18:28:58][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\sys.pyi
+[01/24 18:28:59][DEBUG] diff.py: 282: diff parser start
+[01/24 18:28:59][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:28:59][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:28:59][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:28:59][DEBUG] diff.py: 339: diff parser end
+[01/24 18:28:59][DEBUG] diff.py: 282: diff parser start
+[01/24 18:28:59][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:28:59][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:28:59][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:28:59][DEBUG] diff.py: 339: diff parser end
+[01/24 18:28:59][DEBUG] diff.py: 282: diff parser start
+[01/24 18:28:59][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:28:59][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:28:59][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:28:59][DEBUG] diff.py: 339: diff parser end
+[01/24 18:29:02][DEBUG] diff.py: 282: diff parser start
+[01/24 18:29:02][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:29:02][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:29:02][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:29:02][DEBUG] diff.py: 339: diff parser end
+[01/24 18:29:02][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\typing.py
+[01/24 18:29:02][DEBUG] cache.py: 143: pickle loaded: D:\anaconda3\lib\site-packages\jedi\third_party\typeshed\stdlib\3\typing.pyi
+[01/24 18:32:25][DEBUG] diff.py: 282: diff parser start
+[01/24 18:32:25][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:32:25][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:32:25][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:32:25][DEBUG] diff.py: 339: diff parser end
+[01/24 18:32:25][DEBUG] diff.py: 282: diff parser start
+[01/24 18:32:25][DEBUG] diff.py: 293: line_lengths old: 1; new: 1
+[01/24 18:32:25][DEBUG] diff.py: 296: -> code[replace] old[1:1] new[1:1]
+[01/24 18:32:25][DEBUG] diff.py: 421: parse_part from 1 to 1 (to 0 in part parser)
+[01/24 18:32:25][DEBUG] diff.py: 339: diff parser end
+[01/24 18:33:05][INFO] ava_dataset.py:  49: Finished loading annotations from: %s
+[01/24 18:33:05][INFO] ava_dataset.py:  50: Detection threshold: 0.9
+[01/24 18:33:05][INFO] ava_dataset.py:  51: Number of unique boxes: 1132
+[01/24 18:33:05][INFO] ava_dataset.py:  52: Number of annotations: 3009
+[01/24 18:33:05][INFO] ava_dataset.py: 122: 706 keyframes used.
+[01/24 18:33:05][INFO] ava_dataset.py: 309: === AVA dataset summary ===
+[01/24 18:33:05][INFO] ava_dataset.py: 310: Split: train
+[01/24 18:33:05][INFO] ava_dataset.py: 311: Number of video: 1
+[01/24 18:33:05][INFO] ava_dataset.py: 316: Number of key frames: 706
+[01/24 18:33:05][INFO] ava_dataset.py: 317: Number of boxes: 1132.

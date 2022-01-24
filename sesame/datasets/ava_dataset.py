@@ -1,6 +1,8 @@
 import os
+import random
 import numpy as np
 import torch
+import cv2
 import sesame.utils.logger as logger
 
 from collections import defaultdict
@@ -8,66 +10,22 @@ from . import cv2_transform
 from . import transform
 from . import utils
 
-log = logger.getLogger(__name__)
+log = logger.get_logger(__name__)
 
 FPS = 30
 AVA_VALID_FRAMES = range(902, 1799)
 
 
-def load_image_lists(cfg, is_train):
+def load_annotation(cfg, mode):
     """
-    Loading image paths from corresponding files.
-
-    Args:
-        cfg (CfgNode): config
-        is_train (bool): if it is training dataset or not
-
-    Returns:
-        image_paths(list[list]): a list of items. Each item (also a list)
-                                corresponds to one video and contains the
-                                paths of images for this video.
-        video_idx_to_name (list): a list which stores video names
-    """
-    list_filenames = [
-        os.path.join(cfg.AVA.FRAME_LIST_DIR, filename)
-        for filename in (cfg.AVA.TRAIN_LISTS if is_train else cfg.AVA.TEST_LISTS)
-    ]
-    image_paths = defaultdict(list)
-    video_name_to_idx = {}
-    video_idx_to_name = []
-    for list_filename in list_filenames:
-        with open(list_filename, "r") as f:
-            for line in f.read().splitlines():
-                row = line.split()
-                # The format of each row should follow:
-                # original_video_id video_id frame_id path labels
-                assert len(row) == 5
-                video_name = row[0]
-
-                if video_name not in video_name_to_idx:
-                    idx = len(video_name_to_idx)
-                    video_name_to_idx[video_name] = idx
-                    video_idx_to_name.append(video_name)
-
-                data_key = video_name_to_idx[video_name]
-
-                image_paths[data_key].append(os.path.join(cfg.AVA.FRAME_DIR, row[3]))
-
-    image_paths = [image_paths[i] for i in range(len(image_paths))]
-
-    log.info("Finished loading image paths from: {}".format(", ".join(list_filenames)))
-    return image_paths, video_idx_to_name
-
-
-def load_boxes_and_labels(cfg, mode):
-    """
-    Loading boxes and labels from csv files.
+    Loading video name, boxes and labels from csv files.
 
     Args:
         cfg (CfgNode): config.
         mode (str): 'train', 'val' or 'test' mode.
 
     Returns:
+        video_idx_to_name (list): a list which stores video names.
         all_boxes (dict): a dict which maps from 'video_name' and
                         'frame_sec' to a list of 'box'. Each 'box'
                         is a ['box_coord', 'box_labels'] where 'box_coord'
@@ -82,7 +40,7 @@ def load_boxes_and_labels(cfg, mode):
     detect_thresh = cfg.AVA.DETECTION_SCORE_THRESH
     # Only select frame_sec % 4 = 0 samples for validation if not set FULL_TEST_ON_VAL
     boxes_sample_rate = 4 if mode == "val" and not cfg.AVA.FULL_TEST_ON_VAL else 1
-    all_boxes, count, unique_box_count = parse_bboxes_file(
+    video_idx_to_name, all_boxes, count, unique_box_count = parse_annotation_file(
         ann_filenames=ann_filenames,
         ann_is_gt_box=ann_is_gt_box,
         detect_thresh=detect_thresh,
@@ -93,7 +51,28 @@ def load_boxes_and_labels(cfg, mode):
     log.info("Number of unique boxes: {}".format(unique_box_count))
     log.info("Number of annotations: {}".format(count))
 
-    return all_boxes
+    return video_idx_to_name, all_boxes
+
+
+def get_video_path(video_idx_to_name, mode, cfg):
+    """
+    Get video file paths
+    Args:
+        video_idx_to_name (list): a list of video name.
+        mode (str): 'train', 'val' or 'test' mode.
+        cfg (CfgNode): config.
+    """
+    video_name_to_path = {}
+    video_dir = os.path.join(
+        cfg.DATA.PATH_TO_DATA_DIR,
+        cfg.AVA.TRAIN_DIR
+    ) if mode == "train" else os.path.join(cfg.DATA.PATH_TO_DATA_DIR, cfg.AVA.TEST_DIR)
+    video_list = os.listdir(video_dir)
+    for video_name in video_idx_to_name:
+        video_path = list(filter(lambda x: x.split('.')[0] == video_name, video_list))[0]
+        video_name_to_path[video_name] = os.path.join(video_dir, video_path)
+
+    return video_name_to_path
 
 
 def get_keyframe_data(boxes_and_labels):
@@ -112,13 +91,13 @@ def get_keyframe_data(boxes_and_labels):
                                 corresponding labels.
     """
 
-    def sec_to_frame(sec):
-        """
-        Convert time index (in second) to frame index.
-        0: 900
-        30: 901
-        """
-        return (sec - 900) * FPS
+    # def sec_to_frame(sec):
+    #     """
+    #     Convert time index (in second) to frame index.
+    #     0: 900
+    #     30: 901
+    #     """
+    #     return (sec - 900) * FPS
 
     keyframe_indices = []
     keyframe_box_and_labels = []
@@ -132,7 +111,8 @@ def get_keyframe_data(boxes_and_labels):
 
             if len(boxes_and_labels[video_idx][sec]) > 0:
                 keyframe_indices.append(
-                    (video_idx, sec_idx, sec, sec_to_frame(sec))
+                    (video_idx, sec_idx, sec)
+                    # (video_idx, sec_idx, sec, sec_to_frame(sec))
                 )
                 keyframe_box_and_labels[video_idx].append(
                     boxes_and_labels[video_idx][sec]
@@ -158,12 +138,12 @@ def get_num_boxes_used(keyframe_indices, keyframe_boxes_and_labels):
     """
 
     count = 0
-    for video_idx, sec_idx, _, _ in keyframe_indices:
+    for video_idx, sec_idx, _, in keyframe_indices:
         count += len(keyframe_boxes_and_labels[video_idx][sec_idx])
     return count
 
 
-def parse_bboxes_file(ann_filenames, ann_is_gt_box, detect_thresh, boxes_sample_rate=1):
+def parse_annotation_file(ann_filenames, ann_is_gt_box, detect_thresh, boxes_sample_rate=1):
     """
     Parse AVA bounding boxes files.
 
@@ -176,6 +156,7 @@ def parse_bboxes_file(ann_filenames, ann_is_gt_box, detect_thresh, boxes_sample_
         boxes_sample_rate (int): sample rate for test bounding boxes. Get 1 every `boxes_sample_rate`.
     """
     all_boxes = {}
+    video_idx_to_name = set()
     count = 0
     unique_box_count = 0
     for filename, is_gt_box in zip(ann_filenames, ann_is_gt_box):
@@ -190,6 +171,8 @@ def parse_bboxes_file(ann_filenames, ann_is_gt_box, detect_thresh, boxes_sample_
                         continue
 
                 video_name, frame_sec = row[0], int(row[1])
+                video_idx_to_name.add(video_name)
+
                 if frame_sec % boxes_sample_rate != 0:
                     continue
 
@@ -218,7 +201,42 @@ def parse_bboxes_file(ann_filenames, ann_is_gt_box, detect_thresh, boxes_sample_
                 all_boxes[video_name][frame_sec].values()
             )
 
-    return all_boxes, count, unique_box_count
+    return list(video_idx_to_name), all_boxes, count, unique_box_count
+
+
+def load_clip(video_path, center_sec, sequence_length, sampel_rate):
+    """
+    Get input clip from the video/folder of images for a given
+    keyframe index.
+    Args:
+        video_path (str): the path to a certain video
+        center_sec (int): second of the current clip in the certain video.
+        sequence_length (int):
+        sampel_rate (int):
+    Returns:
+        clip (tensors): formatted input clips corresponding to the current keyframe.
+    """
+    cap = cv2.VideoCapture(video_path)
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    keyframe_idx = fps * center_sec
+    seq = utils.get_sequence(
+        keyframe_idx,
+        sequence_length // 2,
+        sampel_rate,
+        total_frames,
+    )
+    clip = []
+    for frame_idx in seq:
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_idx)
+        was_read, frame = cap.read()
+        if was_read:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            clip.append(frame)
+        else:
+            log.error("Unable to read frame. Duplicating previous frame.")
+            clip.append(clip[-1])
+    return torch.as_tensor(np.stack(clip))
 
 
 class Ava(torch.utils.data.Dataset):
@@ -230,8 +248,8 @@ class Ava(torch.utils.data.Dataset):
         self.cfg = cfg
         self._split = split
         self._sample_rate = cfg.DATA.SAMPLING_RATE
-        self._video_length = cfg.DATA.NUM_FRAMES
-        self._seq_len = self._video_length * self._sample_rate
+        self._number_frames = cfg.DATA.NUM_FRAMES
+        self._seq_len = self._number_frames * self._sample_rate
         self._num_classes = cfg.MODEL.NUM_CLASSES
         # Augmentation params
         self._data_mean = cfg.DATA.MEAN
@@ -258,20 +276,20 @@ class Ava(torch.utils.data.Dataset):
         Args:
             cfg(CfgNode): config
         """
-        # Loading frame paths
-        (
-            self._image_paths,
-            self._video_idx_to_name
-        ) = load_image_lists(cfg, is_train=(self._split == "train"))
 
-        # Loading annotations for boxes and labels
-        boxes_and_labels = load_boxes_and_labels(cfg, mode=self._split)
+        # Loading annotations for video names, boxes and labels
+        self._video_idx_to_name, boxes_and_labels = load_annotation(cfg, mode=self._split)
 
-        assert len(boxes_and_labels) == len(self._image_paths)
+        # Get video path
+        self._video_name_to_path = get_video_path(
+            self._video_idx_to_name,
+            self._split,
+            self.cfg,
+        )
 
         boxes_and_labels = [
             boxes_and_labels[self._video_idx_to_name[i]]
-            for i in range(len(self._image_paths))
+            for i in range(len(self._video_idx_to_name))
         ]
 
         # Get indices of keyframes and corresponding boxes anf labels.
@@ -290,11 +308,11 @@ class Ava(torch.utils.data.Dataset):
     def print_summary(self):
         log.info("=== AVA dataset summary ===")
         log.info("Split: {}".format(self._split))
-        log.info("Number of video: {}".format(len(self._image_paths)))
-        total_frames = sum(
-            len(video_img_paths) for video_img_paths in self._image_paths
-        )
-        log.info("Number of frames: {}".format(total_frames))
+        log.info("Number of video: {}".format(len(self._video_idx_to_name)))
+        # total_frames = sum(
+        #     len(video_img_paths) for video_img_paths in self._image_paths
+        # )
+        # log.info("Number of frames: {}".format(total_frames))
         log.info("Number of key frames: {}".format(len(self)))
         log.info("Number of boxes: {}.".format(self._num_boxes_used))
 
@@ -303,13 +321,13 @@ class Ava(torch.utils.data.Dataset):
         Returns:
             (int): the number of videos in the dataset
         """
-        return self.num_videos
+        return self.num_clips
 
     @property
-    def num_videos(self):
+    def num_clips(self):
         """
         Returns:
-            (int): the number of videos in the dataset.
+            (int): the number of clips sampling from videos in the dataset.
         """
         return len(self._keyframe_indices)
 
@@ -567,14 +585,18 @@ class Ava(torch.utils.data.Dataset):
             extra_data (dict): a dict containing extra data fields, like "boxes",
                                 "ori_boxes" and "metadata".
         """
-        video_idx, sec_idx, sec, center_idx = self._keyframe_indices[idx]
-        # Get the frame idxs for current clip.
-        seq = utils.get_sequence(
-            center_idx,
-            self._seq_len // 2,
-            self._sample_rate,
-            num_frames=len(self._image_paths[video_idx]),
-        )
+
+        for _ in range (5):
+            video_idx, sec_idx, sec = self._keyframe_indices[idx]
+            video_path = self._video_name_to_path[self._video_idx_to_name[video_idx]]
+            if os.path.exists(video_path):
+                break
+            else:
+                log.warning("file {} does not exist".format(video_path))
+                idx = random.randint(0, int(self.num_clips) - 1)
+
+        # Load current clip.
+        images = load_clip(video_path, sec, self._seq_len, self._sample_rate)
 
         clip_label_list = self._keyframe_boxes_and_labels[video_idx][sec_idx]
         assert len(clip_label_list) > 0
@@ -591,12 +613,6 @@ class Ava(torch.utils.data.Dataset):
         boxes = boxes[:, :4].copy()
         ori_boxes = boxes.copy()
 
-        # Load images of current clip.
-        image_paths = [self._image_paths[video_idx][frame] for frame in seq]
-        images = utils.retry_load_images(
-            image_paths, backend=self.cfg.AVA.IMG_PROC_BACKEND
-        )
-
         if self.cfg.AVA.IMG_PROC_BACKEND == "pytorch":
             # T H W C -> T C H W.
             images = images.permute(0, 3, 1, 2)
@@ -612,7 +628,7 @@ class Ava(torch.utils.data.Dataset):
         label_arrs = np.zeros((len(labels), self._num_classes), dtype=np.int32)
         for i, box_labels in enumerate(labels):
             # AVA label index starts from 1.
-            for label in boxes:
+            for label in box_labels:
                 if label == -1:
                     continue
                 assert 1 <= label <= 80
@@ -628,19 +644,3 @@ class Ava(torch.utils.data.Dataset):
         }
 
         return images, label_arrs, idx, extra_data
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -545,6 +545,67 @@ _C.DETECTION.SPATIAL_SCALE_FACTOR = 16
 # RoI tranformation resolution.
 _C.DETECTION.ROI_XFORM_RESOLUTION = 7
 
+# -----------------------------------------------------------------------------
+# AVA Dataset options
+# -----------------------------------------------------------------------------
+_C.AVA = CfgNode()
+
+# Directory path of training samples.
+_C.AVA.TRAIN_DIR = "trainval"
+
+# Directory path of training samples.
+_C.AVA.TEST_DIR = "trainval"
+
+# Directory path for annotation files.
+_C.AVA.ANNOTATION_DIR = None
+
+# Filename of training samples list files.
+_C.AVA.TRAIN_LISTS = "ava_train_v2.2.csv"
+
+# Filename of test samples list files.
+_C.AVA.TEST_LISTS = "ava_val_v2.2.csv"
+
+# Filenames of box list files for training. Note that we assume files which
+# contains predicted boxes will have a suffix "predicted_boxes" in the
+# filename.
+_C.AVA.TRAIN_GT_BOX_LISTS = ["ava_train_v2.2.csv"]
+_C.AVA.TRAIN_PREDICT_BOX_LISTS = []
+
+# Filenames of box list files for test.
+_C.AVA.TEST_PREDICT_BOX_LISTS = ["ava_val_predicted_boxes.csv"]
+
+# This option controls the score threshold for the predicted boxes to use.
+_C.AVA.DETECTION_SCORE_THRESH = 0.9
+
+# If use BGR as the format of input frames.
+_C.AVA.BGR = False
+
+# Training augmentation parameters
+# Whether to use color augmentation method.
+_C.AVA.TRAIN_USE_COLOR_AUGMENTATION = False
+
+# Whether to only use PCA jitter augmentation when using color augmentation
+# method (otherwise combine with color jitter method).
+_C.AVA.TRAIN_PCA_JITTER_ONLY = True
+
+# Whether to do horizontal flipping during test.
+_C.AVA.TEST_FORCE_FLIP = False
+
+# Whether to use full test set for validation split.
+_C.AVA.FULL_TEST_ON_VAL = False
+
+# The name of the file to the ava label map.
+_C.AVA.LABEL_MAP_FILE = "ava_action_list_v2.2_for_activitynet_2019.pbtxt"
+
+# The name of the file to the ava exclusion.
+_C.AVA.EXCLUSION_FILE = "ava_val_excluded_timestamps_v2.2.csv"
+
+# The name of the file to the ava groundtruth.
+_C.AVA.GROUNDTRUTH_FILE = "ava_val_v2.2.csv"
+
+# Backend to process image, includes `pytorch` and `cv2`.
+_C.AVA.IMG_PROC_BACKEND = "cv2"
+
 # ---------------------------------------------------------------------------- #
 # Multigrid training options
 # See https://arxiv.org/abs/1912.00998 for details about multigrid training.
