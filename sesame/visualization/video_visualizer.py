@@ -13,7 +13,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg
 
 import sesame.utils.logger as logger
 from sesame.utils.misc import get_class_names
-from colormap import random_color
+from sesame.visualization.colormap import random_color
 
 
 log = logger.get_logger(__name__)
@@ -1224,7 +1224,7 @@ class VideoVisualizer(object):
         assert mode in ["top-k", "thres"], "Mode {} is not supported.".format(mode)
         self.mode = mode
         self.num_classes = num_classes
-        self.class_names, _, _ = get_class_names(class_names_path, None, None)
+        self.class_names, _, _ = get_class_names(class_names_path)
         self.top_k = top_k
         self.thres = thres
         self.lower_thres = lower_thres
@@ -1556,6 +1556,33 @@ def _create_text_labels(classes, scores, class_names, is_crowd=None):
             labels = ["{} {:.0f}%".format(l, s * 100) for l, s in zip(labels, scores)]
     if labels is not None and is_crowd is not None:
         labels = [l + ("|crowd" if crowd else "") for l, crowd in zip(labels, is_crowd)]
+    return labels
+
+
+def _create_text_labels(classes, scores, class_names, ground_truth=False):
+    """
+    Create text labels.
+    Args:
+        classes (list[int]): a list of class ids for each example.
+        scores (list[float] or None): list of scores for each example.
+        class_names (list[str]): a list of class names, ordered by their ids.
+        ground_truth (bool): whether the labels are ground truth.
+    Returns:
+        labels (list[str]): formatted text labels.
+    """
+    try:
+        labels = [class_names[i] for i in classes]
+    except IndexError:
+        logger.error("Class indices get out of range: {}".format(classes))
+        return None
+
+    if ground_truth:
+        labels = ["[{}] {}".format("GT", label) for label in labels]
+    elif scores is not None:
+        assert len(classes) == len(scores)
+        labels = [
+            "[{:.2f}] {}".format(s, label) for s, label in zip(scores, labels)
+        ]
     return labels
 
 

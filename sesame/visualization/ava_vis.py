@@ -5,7 +5,7 @@ import torch
 import tqdm
 
 import sesame.utils.logger as logger
-from sesame.datasets.ava_dataset import parse_bboxes_file
+from sesame.datasets.ava_dataset import parse_annotation_file
 from sesame.datasets.cv2_transform import scale, scale_boxes
 from sesame.datasets.utils import get_sequence
 from sesame.visualization.utils import process_cv2_inputs
@@ -31,13 +31,13 @@ class AVAVisualizerWithPrecomputedBox(object):
         self.fps = None
         if os.path.isdir(self.source):
             self.fps = cfg.DEMO.FPS
-            self.video_name = self.source.split("/")[-1]
+            self.video_name = os.path.split(self.source)[-1]
             self.source = os.path.join(
                 self.source, "{}_%06d.jpg".format(self.video_name)
             )
         else:
-            self.video_name = self.source.split("/")[-1]
-            self.video_name = self.video_name.split(".")[0]
+            self.video_name = os.path.split(self.source)[-1]
+            self.video_name = os.path.splitext(self.video_name)[0]
 
         self.cfg = cfg
         self.cap = cv2.VideoCapture(self.source)
@@ -130,7 +130,7 @@ class AVAVisualizerWithPrecomputedBox(object):
 
         # Build the video model and print model statistics.
         for keyframe_idx, boxes_and_labels in tqdm.tqdm(
-            self.pred_boxes.items()
+                self.pred_boxes.items()
         ):
             inputs = self.get_input_clip(keyframe_idx)
             boxes = boxes_and_labels[0]
@@ -205,19 +205,21 @@ class AVAVisualizerWithPrecomputedBox(object):
             (draw_range[1] - draw_range[0]) * self.no_frames_repeat
             + draw_range[0],
         ]
+        prev_offset = self.cfg.DEMO.STARTING_SECOND * self.fps
         prev_buffer = []
-        prev_end_idx = 0
+        prev_end_idx = prev_offset + 0
 
         log.info("Start Visualization...")
         for keyframe_idx in tqdm.tqdm(all_keys):
+            # print("key frame idx is {}".format(keyframe_idx))
             pred_gt_boxes = all_boxes[keyframe_idx]
             # Find the starting index of the clip. If start_idx exceeds
             # the beginning of the video, we only choose valid frame
             # from index 0
-            start_idx = max(0, keyframe_idx - self.seq_length // 2)
+            start_idx = max(0, keyframe_idx - self.seq_length // 2) + prev_offset
             # Number of frames from the start of the current clip and
             # the end of the previous clip.
-            dist = start_idx - prev_end_idx
+            dist = int(start_idx - prev_end_idx)
             # if there are unwritten frames in between clips.
             if dist >= 0:
                 # Get the frames in between previous clip and current clip.
@@ -287,7 +289,7 @@ class AVAVisualizerWithPrecomputedBox(object):
         # If we still have some remaining frames in the input file,
         # write those to the output file as well.
         if prev_end_idx < self.total_frames:
-            dist = self.total_frames - prev_end_idx
+            dist = int(self.total_frames - prev_end_idx)
             remaining_clip = self._get_frame_range(prev_end_idx, dist)
             for frame in remaining_clip:
                 self.display(frame)
@@ -303,6 +305,7 @@ class AVAVisualizerWithPrecomputedBox(object):
         """
         if self.output_file is None:
             cv2.imshow("Sesame", frame)
+            cv2.waitKey(1)
         else:
             self.output_file.write(frame)
 
@@ -357,8 +360,9 @@ def merge_pred_gt_boxes(pred_dict, gt_dict=None):
             where `is_gt` is a boolean indicate whether the `boxes` and `labels` are ground-truth.
     """
     merged_dict = {}
-    for key, item in pred_dict.items():
-        merged_dict[key] = [[False, item[0], item[1]]]
+    if pred_dict is not None:
+        for key, item in pred_dict.items():
+            merged_dict[key] = [[False, item[0], item[1]]]
 
     if gt_dict is not None:
         for key, item in gt_dict.items():
@@ -422,19 +426,20 @@ def load_boxes_labels(cfg, video_name, fps, img_width, img_height):
 
     preds_boxes_path = cfg.DEMO.PREDS_BOXES
     gt_boxes_path = cfg.DEMO.GT_BOXES
+    preds_boxes = None
+    gt_boxes = None
 
-    preds_boxes, _, _ = parse_bboxes_file(
-        ann_filenames=[preds_boxes_path],
-        ann_is_gt_box=[False],
-        detect_thresh=cfg.AVA.DETECTION_SCORE_THRESH,
-        boxes_sample_rate=1,
-    )
-    preds_boxes = preds_boxes[video_name]
-    if gt_boxes_path == "":
-        gt_boxes = None
-    else:
+    if preds_boxes_path != "":
+        _, preds_boxes, _, _ = parse_annotation_file(
+            ann_filenames=[preds_boxes_path],
+            ann_is_gt_box=[False],
+            detect_thresh=cfg.AVA.DETECTION_SCORE_THRESH,
+            boxes_sample_rate=1,
+        )
+        preds_boxes = preds_boxes[video_name]
 
-        gt_boxes, _, _ = parse_bboxes_file(
+    if gt_boxes_path != "":
+        _, gt_boxes, _, _ = parse_annotation_file(
             ann_filenames=[gt_boxes_path],
             ann_is_gt_box=[True],
             detect_thresh=cfg.AVA.DETECTION_SCORE_THRESH,
@@ -442,33 +447,9 @@ def load_boxes_labels(cfg, video_name, fps, img_width, img_height):
         )
         gt_boxes = gt_boxes[video_name]
 
-    preds_boxes = process_bboxes_dict(preds_boxes)
+    if preds_boxes is not None:
+        preds_boxes = process_bboxes_dict(preds_boxes)
     if gt_boxes is not None:
         gt_boxes = process_bboxes_dict(gt_boxes)
 
     return preds_boxes, gt_boxes
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

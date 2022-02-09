@@ -92,6 +92,11 @@ TEST:
 DATA_LOADER:
   NUM_WORKERS: 0
   PIN_MEMORY: True
+DEMO:
+  LABEL_FILE_PATH: E:\datasets\ava\ava_action_list.json
+  INPUT_VIDEO: E:\datasets\ava\parse demo\_eBah6c5kyA.mkv
+  GT_BOXES: E:\datasets\ava\parse demo\ava_demo.csv
+  STARTING_SECOND: 900
 NUM_GPUS: 1
 NUM_SHARDS: 1
 RNG_SEED: 0
