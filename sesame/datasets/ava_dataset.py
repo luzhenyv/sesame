@@ -586,7 +586,7 @@ class Ava(torch.utils.data.Dataset):
                                 "ori_boxes" and "metadata".
         """
 
-        for _ in range (5):
+        for _ in range(5):
             video_idx, sec_idx, sec = self._keyframe_indices[idx]
             video_path = self._video_name_to_path[self._video_idx_to_name[video_idx]]
             if os.path.exists(video_path):

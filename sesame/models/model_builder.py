@@ -178,6 +178,7 @@ class MViT(nn.Module):
             dropout_rate=cfg.MODEL.DROPOUT_RATE,
             act_func=cfg.MODEL.HEAD_ACT,
         )
+
         if self.sep_pos_embed:
             trunc_normal_(self.pos_embed_spatial, std=0.02)
             trunc_normal_(self.pos_embed_temporal, std=0.02)
