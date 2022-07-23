@@ -16,7 +16,7 @@ def _suppress_print():
     def print_pass(*objects, sep=" ", end="\n", file=sys.stdout, flush=False):
         pass
 
-    builtins.print = print_pass()
+    builtins.print = print_pass
 
 
 def setup_logging(output_dir=None):
