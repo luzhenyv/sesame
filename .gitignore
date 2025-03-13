@@ -172,16 +172,3 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
-
-# MongoDB
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Node
-node_modules/
-
-# iOS
-ios/
-
