@@ -1,0 +1,32 @@
+## Project Structure
+
+.
+├── README.md                 # Project documentation and setup instructions
+├── backend/                  # Flask backend
+│   ├── app/                 # Application package
+│   │   ├── __init__.py     # Flask app initialization
+│   │   ├── api/            # API endpoints
+│   │   ├── models/         # Database models
+│   │   ├── schemas/        # Marshmallow schemas
+│   │   └── utils/          # Utility functions
+│   ├── config.py           # Configuration settings
+│   └── requirements.txt     # Python dependencies
+├── frontend/                # React web application
+│   ├── package.json        # Node.js dependencies
+│   ├── public/             # Static files
+│   └── src/                # Source code
+│       ├── components/     # React components
+│       ├── pages/          # Page components
+│       ├── services/       # API services
+│       └── store/          # Redux store
+├── mobile/                  # React Native mobile app
+│   ├── package.json        # Node.js dependencies
+│   ├── android/            # Android specific code
+│   ├── ios/               # iOS specific code
+│   └── src/               # Source code
+│       ├── components/    # React Native components
+│       ├── screens/       # Screen components
+│       ├── services/      # API services
+│       └── store/         # Redux store
+├── database/               # Database migrations and schemas
+└── docs/                   # Project documentation
