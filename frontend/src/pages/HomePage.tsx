@@ -408,15 +408,6 @@ const HomePage: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <Logo>Health Monitor</Logo>
-        <Nav>
-          <a href="#home">Home</a>
-          <a href="#family">Family</a>
-          <a href="#profile">Profile</a>
-        </Nav>
-      </Header>
-
       <MainContent>
         <CarouselSection>
           <StyledSlider {...sliderSettings}>
@@ -552,10 +543,6 @@ const HomePage: React.FC = () => {
           </BlogGrid>
         </section>
       </MainContent>
-
-      <Footer>
-        <p>© 2024 Health Monitor. All rights reserved.</p>
-      </Footer>
     </Container>
   )
 }
