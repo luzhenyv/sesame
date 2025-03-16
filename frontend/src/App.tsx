@@ -1,21 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import HomePage from './pages/HomePage';
-import FamilyPage from './pages/FamilyPage';
-import ProfilePage from './pages/ProfilePage';
 
-const App: React.FC = () => {
+interface AppProps {
+  children?: React.ReactNode;
+}
+
+const App: React.FC<AppProps> = ({ children }) => {
   return (
-    <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/family" element={<FamilyPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
-      </Layout>
-    </Router>
+    <Layout>
+      {children}
+    </Layout>
   );
 };
 
