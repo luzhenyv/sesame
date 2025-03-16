@@ -25,6 +25,7 @@ const PageContainer = styled(Container)`
   padding-top: 2rem;
   padding-bottom: 4rem;
   min-height: 80vh;
+  background-color: #f8f9fa;
 `;
 
 const PageTitle = styled(Typography)`
