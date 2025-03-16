@@ -10,17 +10,24 @@ const Container = styled.div`
   background-color: #f8f9fa;
   color: #333;
   font-family: 'Roboto', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const PageHeader = styled.div`
@@ -28,6 +35,8 @@ const PageHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
   
   h1 {
     font-size: 2.5rem;
@@ -42,6 +51,9 @@ const SectionContainer = styled.section`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 2rem;
   margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 const SectionHeader = styled.div`
@@ -94,6 +106,8 @@ const Tab = styled.button<{ active: boolean }>`
 // Calendar Components
 const CalendarContainer = styled.div`
   margin-top: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const CalendarHeader = styled.div`
@@ -175,6 +189,8 @@ const CalendarGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const WeekdayHeader = styled.div`
@@ -394,6 +410,8 @@ const AdditionalFeaturesGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const FeatureCard = styled.div`

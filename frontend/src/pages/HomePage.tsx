@@ -89,12 +89,13 @@ const Nav = styled.nav`
 const MainContent = styled.main`
   flex: 1;
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -104,9 +105,8 @@ const MainContent = styled.main`
 
 const CarouselSection = styled.section`
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 const Card = styled.div`
@@ -162,7 +162,7 @@ const SectionTitle = styled.h2`
 
 const StyledSlider = styled(Slider)`
   .slick-list {
-    margin: 0 -10px;
+    margin: 0;
   }
 
   .slick-slide {
@@ -183,11 +183,11 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-prev {
-    left: -50px;
+    left: 10px;
   }
 
   .slick-next {
-    right: -50px;
+    right: 10px;
   }
 
   .slick-dots {
@@ -223,6 +223,7 @@ const SlideContent = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   margin: 10px;
   height: 100%;
+  box-sizing: border-box;
 
   @media (max-width: 768px) {
     padding: 0.75rem;
@@ -391,7 +392,7 @@ const HomePage: React.FC = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         }
       },

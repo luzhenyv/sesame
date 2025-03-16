@@ -33,18 +33,27 @@ const Container = styled.div`
   background-color: #f8f9fa;
   color: #333;
   font-family: 'Roboto', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const PageHeader = styled.div`
   margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
   
   h1 {
     font-size: 2.5rem;
@@ -69,12 +78,16 @@ const FilterSection = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   align-items: end;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const BlogGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const BlogCard = styled.article`
@@ -83,6 +96,8 @@ const BlogCard = styled.article`
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
   
   &:hover {
     transform: translateY(-4px);

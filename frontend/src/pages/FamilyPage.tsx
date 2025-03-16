@@ -79,22 +79,32 @@ const Container = styled.div`
   background-color: #f8f9fa;
   color: #333;
   font-family: 'Roboto', sans-serif;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 2rem;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  box-sizing: border-box;
+  
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 `;
 
 const Section = styled(Card)`
   padding: 1.5rem;
   border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 `;
 
 const SectionTitle = styled.h2`
