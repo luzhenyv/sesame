@@ -595,8 +595,8 @@ const ProfilePage: React.FC = () => {
                 </FormGroup>
                 
                 <FormGroup>
-                  <Label>Age</Label>
-                  <Input type="number" placeholder="Enter your age" />
+                  <Label>Date of Birth</Label>
+                  <Input type="date" placeholder="Select your date of birth" />
                 </FormGroup>
                 
                 <FormGroup>
