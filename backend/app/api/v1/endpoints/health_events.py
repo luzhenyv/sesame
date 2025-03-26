@@ -1,14 +1,15 @@
 from typing import List
+from datetime import datetime
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from sqlalchemy.orm import Session
-from app.api import deps
+from app.db.session import get_db
 from app.schemas.health_event import (
     HealthEventCreate,
     HealthEventUpdate,
     HealthEventResponse,
     HealthEventInDB,
 )
-from app.models.health_event import HealthEvent
+from app.models.health_event import HealthEvent, EventType
 from app.services.file_service import FileService
 from app.core.config import settings
 
@@ -21,11 +22,12 @@ file_service = FileService()
 )
 async def create_health_event(
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     title: str = Form(...),
-    event_type: str = Form(...),
+    event_type: EventType = Form(...),
     description: str = Form(None),
     family_member_id: int = Form(...),
+    date_time: datetime = Form(...),
     file: UploadFile = File(None)
 ):
     """
@@ -35,6 +37,7 @@ async def create_health_event(
     - **event_type**: Type of event (checkup, medication, symptom)
     - **description**: Event description (optional)
     - **family_member_id**: ID of the family member
+    - **date_time**: Date and time of the event
     - **file**: Optional file attachment (image or PDF)
     """
     # Create health event in database
@@ -45,10 +48,13 @@ async def create_health_event(
         family_member_id=family_member_id,
     )
 
-    db_event = HealthEvent(**event_data.model_dump())
-    db.add(db_event)
-    db.commit()
-    db.refresh(db_event)
+    try:
+        db_event = HealthEvent(**event_data.model_dump())
+        db.add(db_event)
+        db.commit()
+        db.refresh(db_event)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     # Handle file upload if provided
     if file:
@@ -67,9 +73,7 @@ async def create_health_event(
 
 
 @router.get("/", response_model=List[HealthEventResponse], summary="List health events")
-def get_health_events(
-    db: Session = Depends(deps.get_db), skip: int = 0, limit: int = 100
-):
+def get_health_events(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
     """
     Get list of health events with pagination.
 
@@ -83,7 +87,7 @@ def get_health_events(
 @router.get(
     "/{event_id}", response_model=HealthEventResponse, summary="Get health event by ID"
 )
-def get_health_event(event_id: int, db: Session = Depends(deps.get_db)):
+def get_health_event(event_id: int, db: Session = Depends(get_db)):
     """
     Get a specific health event by ID.
 
@@ -101,9 +105,9 @@ def get_health_event(event_id: int, db: Session = Depends(deps.get_db)):
 async def update_health_event(
     event_id: int,
     *,
-    db: Session = Depends(deps.get_db),
+    db: Session = Depends(get_db),
     title: str = Form(None),
-    event_type: str = Form(None),
+    event_type: EventType = Form(None),
     description: str = Form(None),
     family_member_id: int = Form(None),
     file: UploadFile = File(None)
@@ -152,7 +156,7 @@ async def update_health_event(
 
 
 @router.delete("/{event_id}", summary="Delete health event")
-async def delete_health_event(event_id: int, db: Session = Depends(deps.get_db)):
+async def delete_health_event(event_id: int, db: Session = Depends(get_db)):
     """
     Delete a health event and its associated file.
 

@@ -23,7 +23,7 @@ def upgrade() -> None:
         "family_members",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
-        sa.Column("relationship", sa.String(length=50), nullable=False),
+        sa.Column("relation_type", sa.String(length=50), nullable=False),
         sa.Column("date_of_birth", sa.DateTime(), nullable=True),
         sa.Column("health_score", sa.Integer(), nullable=True),
         sa.Column("notes", sa.Text(), nullable=True),
@@ -31,14 +31,20 @@ def upgrade() -> None:
         sa.Column("updated_at", sa.DateTime(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(op.f("ix_family_members_id"), "family_members", ["id"], unique=False)
+    op.create_index(
+        op.f("ix_family_members_id"), "family_members", ["id"], unique=False
+    )
 
     # Create health_events table
     op.create_table(
         "health_events",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("title", sa.String(length=255), nullable=False),
-        sa.Column("event_type", sa.String(length=50), nullable=False),
+        sa.Column(
+            "event_type",
+            sa.Enum("checkup", "medication", "symptom", name="eventtype"),
+            nullable=False,
+        ),
         sa.Column("description", sa.Text(), nullable=True),
         sa.Column("date_time", sa.DateTime(), nullable=False),
         sa.Column("family_member_id", sa.Integer(), nullable=False),
@@ -56,7 +62,7 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
-    op.drop_index(op.f("ix_healthevents_id"), table_name="healthevents")
-    op.drop_table("healthevents")
-    op.drop_index(op.f("ix_familymembers_id"), table_name="familymembers")
-    op.drop_table("familymembers")
+    op.drop_index(op.f("ix_health_events_id"), table_name="health_events")
+    op.drop_table("health_events")
+    op.drop_index(op.f("ix_family_members_id"), table_name="family_members")
+    op.drop_table("family_members")

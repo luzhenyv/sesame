@@ -1,11 +1,13 @@
 from datetime import datetime, UTC
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
-from sqlalchemy.orm import relationship as sqlalchemy_relationship
+from sqlalchemy.orm import relationship
 
 from app.db.base_class import Base
-from app.models.health_event import HealthEvent
+
+if TYPE_CHECKING:
+    from app.models.health_event import HealthEvent
 
 
 class FamilyMember(Base):
@@ -25,6 +27,6 @@ class FamilyMember(Base):
     )
 
     # Relationships
-    health_events: Mapped[List["HealthEvent"]] = sqlalchemy_relationship(
+    health_events: Mapped[List["HealthEvent"]] = relationship(
         "HealthEvent", back_populates="family_member", lazy="selectin"
     )

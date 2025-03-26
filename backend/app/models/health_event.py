@@ -19,7 +19,7 @@ class HealthEvent(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
-    event_type: Mapped[str] = mapped_column(Enum(EventType), nullable=False)
+    event_type: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     date_time: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     family_member_id: Mapped[int] = mapped_column(
@@ -35,4 +35,6 @@ class HealthEvent(Base):
     file_types: Mapped[List[str]] = mapped_column(ARRAY(String), nullable=True)
 
     # Relationships
-    family_member = relationship("FamilyMember", back_populates="health_events")
+    family_member = relationship(
+        "FamilyMember", back_populates="health_events", lazy="selectin"
+    )

@@ -11,40 +11,20 @@ from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.main import app
-from app.db.base import Base
 from app.db.session import get_db
+from app.core.config import settings
 
-# Test database URL
-SQLALCHEMY_DATABASE_URL = "sqlite:///"
-
-# Create test database engine
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
-
-# Create test session
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-
-@pytest.fixture(scope="session")
-def db_engine():
-    Base.metadata.create_all(bind=engine)
-    yield engine
-    Base.metadata.drop_all(bind=engine)
+# Test Server URL
+TEST_SERVER_URL = "http://127.0.0.1:8000"
 
 
 @pytest.fixture(scope="function")
-def db_session(db_engine):
-    connection = db_engine.connect()
-    transaction = connection.begin()
-    session = TestingSessionLocal(bind=connection)
-
+def db_session():
+    engine = create_engine(settings.get_database_url)
+    TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    session = TestingSessionLocal()
     yield session
-
     session.close()
-    transaction.rollback()
-    connection.close()
-
 
 @pytest.fixture(scope="function")
 def client(db_session):
@@ -52,12 +32,13 @@ def client(db_session):
         try:
             yield db_session
         finally:
-            pass
-
+            db_session.close()
+            
     app.dependency_overrides[get_db] = override_get_db
-    with TestClient(app) as test_client:
+    with TestClient(app, base_url="http://127.0.0.1:8000") as test_client:
         yield test_client
     app.dependency_overrides.clear()
+
 
 
 @pytest.fixture
