@@ -79,3 +79,131 @@
 - Created responsive and visually appealing member cards
 - Added proper TypeScript support
 - Maintained clean code architecture
+
+## Sprint 2: Health Event Logging System
+
+### Features:
+
+1. Event Creation Interface
+   - Modal/window-based event creation
+   - File attachments support:
+     - Single file type per upload (either images OR PDFs)
+     - Multiple file upload capability (optional)
+   - Input methods:
+     - Text input for details
+     - Voice input for details
+   - Event metadata:
+     - Title
+     - Event type (checkup, medication, symptom)
+     - Description
+     - Family member assignment
+     - Date/time
+   - AI-assisted content generation (future feature):
+     - Auto-generated title
+     - Event type suggestion
+     - Content summarization
+     - User verification before submission
+
+2. Event Management System
+   - Full CRUD operations:
+     - Create new health events
+     - Read/view event details
+     - Update existing events
+     - Delete events
+   - File attachment management
+   - PostgreSQL database integration
+
+3. Event Timeline & Calendar Views
+   - HomePage Timeline:
+     - Event cards displaying:
+       - Title
+       - DateTime
+       - Abstract/summary
+       - Image previews
+     - Filtering capabilities:
+       - By event type
+       - By family member
+       - By date range
+       - By severity
+     - Timeline pagination
+
+   - ProfilePage Calendar:
+     - Calendar-based event visualization
+     - Event creation via calendar
+     - Event editing and deletion
+     - Event details preview
+
+### Tasks:
+
+1. Backend Implementation (FastAPI)
+   - [x] Set up FastAPI project structure
+     - [x] Create directory structure
+     - [x] Set up FastAPI application
+     - [x] Configure database connection
+     - [x] Create initial health event model
+     - [x] Set up environment configuration
+   - [ ] Configure PostgreSQL database and models
+   - [ ] Implement file upload endpoints:
+     - File type validation
+     - Multiple file handling
+     - File storage management
+   - [ ] Create CRUD API endpoints:
+     - Event creation
+     - Event retrieval (single/multiple)
+     - Event updates
+     - Event deletion
+   - [ ] Implement filtering and pagination
+   - [ ] Add voice input processing
+   - [ ] (Future) Integrate AI content generation
+
+2. Frontend UI Implementation
+   - HomePage.tsx:
+     - [ ] Add "Create Event" button
+     - [ ] Implement event timeline view
+     - [ ] Create event cards with previews
+     - [ ] Add filtering components
+     - [ ] Implement pagination
+
+   - ProfilePage.tsx:
+     - [ ] Enhance calendar with event display
+     - [ ] Add event CRUD operations
+     - [ ] Implement event preview
+     
+   - Event Creation Modal:
+     - [ ] Create file upload component
+     - [ ] Add voice input capability
+     - [ ] Implement form validation
+     - [ ] Add preview functionality
+
+3. Testing
+   - [ ] Implement unit tests
+   - [ ] Implement integration tests
+   - [ ] Implement end-to-end tests
+
+### Acceptance Criteria:
+
+1. Event Creation
+   - Users can create events via modal window
+   - File uploads work for either images OR PDFs
+   - Multiple file uploads function correctly
+   - Both text and voice input methods work
+   - All required fields are validated
+
+2. Event Management
+   - CRUD operations work correctly
+   - File attachments are properly stored and retrieved
+   - Events are properly linked to family members
+   - Database operations are reliable and efficient
+
+3. User Interface
+   - HomePage timeline displays events correctly
+   - ProfilePage calendar shows events accurately
+   - Filtering and pagination work smoothly
+   - UI is responsive and user-friendly
+   - File previews work correctly
+
+4. Data Integrity
+   - Events are properly stored in PostgreSQL
+   - File attachments are securely managed
+   - User data is properly validated
+   - Error handling is comprehensive

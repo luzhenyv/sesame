@@ -1,0 +1,203 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Pytest Rules for FastAPI Backend
+
+## Project Structure for Tests
+
+```
+backend/
+├── tests/
+│   ├── conftest.py           # Shared pytest fixtures
+│   ├── integration/          # Integration tests
+│   │   ├── api/             # API integration tests
+│   │   └── database/        # Database integration tests
+│   └── unit/                # Unit tests
+│       ├── api/             # API endpoint unit tests
+│       ├── models/          # Database model tests
+│       └── services/        # Service layer tests
+```
+
+## Testing Guidelines
+
+### 1. Test Organization
+- Use pytest fixtures for dependency injection and setup/teardown
+- Group tests by feature/component (API, models, services)
+- Separate unit tests from integration tests
+- Use descriptive test names that follow the pattern: `test_<what>_<expected_behavior>`
+
+### 2. FastAPI-Specific Testing
+- Use `TestClient` from FastAPI for API testing
+- Test both successful and error cases
+- Validate response schemas using Pydantic models
+- Test middleware and dependencies
+- Use async/await appropriately in async tests
+
+### 3. Database Testing
+- Use test databases for integration tests
+- Implement database fixtures for test isolation
+- Use transactions to rollback changes
+- Test database migrations
+- Mock external database calls in unit tests
+
+### 4. Code Coverage
+- Aim for high test coverage (80%+)
+- Focus on critical paths and edge cases
+- Use pytest-cov for coverage reporting
+- Document uncovered code with `# pragma: no cover`
+
+### 5. Best Practices
+- Follow the AAA pattern (Arrange, Act, Assert)
+- Use meaningful variable names in tests
+- Keep tests independent and isolated
+- Use appropriate assertion methods
+- Document complex test scenarios
+
+## Example Test Structure
+
+```python
+# test_api_endpoints.py
+import pytest
+from fastapi.testclient import TestClient
+from app.main import app
+from app.schemas import UserResponse
+
+client = TestClient(app)
+
+def test_create_user_success():
+    # Arrange
+    user_data = {
+        "email": "test@example.com",
+        "password": "secure_password"
+    }
+    
+    # Act
+    response = client.post("/api/users/", json=user_data)
+    
+    # Assert
+    assert response.status_code == 201
+    assert UserResponse(**response.json())
+
+@pytest.mark.asyncio
+async def test_async_endpoint():
+    # Arrange
+    test_data = {"key": "value"}
+    
+    # Act
+    response = await client.post("/api/async-endpoint", json=test_data)
+    
+    # Assert
+    assert response.status_code == 200
+```
+
+## Fixture Guidelines
+
+```python
+# conftest.py
+import pytest
+from fastapi.testclient import TestClient
+from app.main import app
+from app.database import get_db
+
+@pytest.fixture
+def test_client():
+    return TestClient(app)
+
+@pytest.fixture
+def test_db():
+    # Setup test database
+    db = get_db()
+    try:
+        yield db
+    finally:
+        # Cleanup
+        db.close()
+```
+
+## Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=app tests/
+
+# Run specific test file
+pytest tests/unit/api/test_users.py
+
+# Run tests with specific marker
+pytest -m "integration"
+```
+
+## Test Dependencies
+
+Add to `requirements-dev.txt`:
+```
+pytest==7.4.0
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+httpx==0.24.1  # Required for TestClient
+```
+
+## Common Test Patterns
+
+1. API Testing:
+```python
+def test_api_endpoint(test_client):
+    response = test_client.get("/api/endpoint")
+    assert response.status_code == 200
+    assert response.json() == expected_data
+```
+
+2. Database Testing:
+```python
+def test_database_operation(test_db):
+    # Test database operations
+    result = test_db.query(Model).first()
+    assert result is not None
+```
+
+3. Authentication Testing:
+```python
+def test_authenticated_endpoint(test_client, auth_token):
+    response = test_client.get(
+        "/api/protected",
+        headers={"Authorization": f"Bearer {auth_token}"}
+    )
+    assert response.status_code == 200
+```
+
+4. Error Case Testing:
+```python
+def test_invalid_input(test_client):
+    response = test_client.post("/api/endpoint", json={"invalid": "data"})
+    assert response.status_code == 422
+    assert "validation error" in response.json()["detail"]
+```
+
+## Performance Testing Guidelines
+
+1. Use pytest-benchmark for performance testing
+2. Test response times under load
+3. Monitor database query performance
+4. Test caching mechanisms
+5. Profile memory usage in long-running tests
+
+## Security Testing Guidelines
+
+1. Test authentication and authorization
+2. Validate input sanitization
+3. Test rate limiting
+4. Check for common security vulnerabilities
+5. Test error handling and logging
+
+## Continuous Integration
+
+1. Run tests on every pull request
+2. Enforce minimum coverage requirements
+3. Run security scans
+4. Perform load testing
+5. Generate and publish test reports
