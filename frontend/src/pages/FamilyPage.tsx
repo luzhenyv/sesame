@@ -7,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   LineChart,
   Line
@@ -44,6 +43,7 @@ import {
   DocumentIcon,
   ExclamationCircleIcon
 } from '@heroicons/react/24/outline';
+import FamilyDashboard from '../components/FamilyDashboard.tsx';
 
 // Types
 interface HealthScore {
@@ -187,85 +187,29 @@ const FamilyPage: React.FC = () => {
     }
   };
 
+  // Mock data for the dashboard
+  const familyMembers = [
+    { id: '1', name: 'Dad', role: 'father', avatar: '😊', healthScore: 92 },
+    { id: '2', name: 'Mom', role: 'mother', avatar: '👩', healthScore: 88 },
+    { id: '3', name: 'Son', role: 'son', avatar: '👦', healthScore: 75 },
+    { id: '4', name: 'Daughter', role: 'daughter', avatar: '👧', healthScore: 65 },
+  ];
+
+  const handleAddMember = () => {
+    // Implement add member functionality
+    console.log('Add member clicked');
+  };
+
   return (
     <Container>
       <MainContent>
-        {/* Personal Health Score Section */}
-        <Section>
-          <SectionTitle>
-            Personal Health Score
-            <MuiTooltip title="Your overall health assessment based on various factors">
-              <ExclamationCircleIcon width={20} />
-            </MuiTooltip>
-          </SectionTitle>
-          
-          <Alert severity="info" sx={{ mb: 2 }}>
-            Upload additional health data to improve score accuracy
-          </Alert>
-          
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={mockPersonalScores}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="category" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar
-                dataKey="score"
-                fill="#8884d8"
-                label={{ position: 'top' }}
-                background={{ fill: '#eee' }}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </Section>
-
-        {/* Family Health Scores Section */}
-        <Section>
-          <SectionTitle>Family Health Scores</SectionTitle>
-          
-          <FormControl sx={{ mb: 2, minWidth: 200 }}>
-            <InputLabel>Time Period</InputLabel>
-            <Select
-              value={timeRange}
-              onChange={(e) => setTimeRange(e.target.value)}
-              label="Time Period"
-            >
-              <MenuItem value="week">Week</MenuItem>
-              <MenuItem value="month">Month</MenuItem>
-              <MenuItem value="year">Year</MenuItem>
-            </Select>
-          </FormControl>
-
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 3 }}>
-            {mockFamilyMembers.map(member => (
-              <ScoreCard
-                key={member.id}
-                color={member.riskLevel === 'low' ? '#e8f5e9' : 
-                       member.riskLevel === 'medium' ? '#fff3e0' : '#ffebee'}
-              >
-                <Typography variant="h1" sx={{ fontSize: '3rem', textAlign: 'center' }}>
-                  {member.avatar}
-                </Typography>
-                <Typography variant="h6" align="center">{member.name}</Typography>
-                <Typography variant="body2" align="center">
-                  Health Score: {member.healthScore}
-                </Typography>
-              </ScoreCard>
-            ))}
-          </Box>
-
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={mockFamilyMembers}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="healthScore" fill="#82ca9d" />
-            </BarChart>
-          </ResponsiveContainer>
-        </Section>
+        {/* Replace the old sections with the new dashboard */}
+        <FamilyDashboard
+          familyScore={85}
+          memberCount={familyMembers.length}
+          members={familyMembers}
+          onAddMember={handleAddMember}
+        />
 
         {/* Health Timeline Section */}
         <Section>
@@ -276,7 +220,7 @@ const FamilyPage: React.FC = () => {
               placeholder="Search events..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              InputProps={{
+              inputProps={{
                 startAdornment: <MagnifyingGlassIcon width={20} />,
               }}
             />
