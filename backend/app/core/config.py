@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_DB: str = "sesame_health"
     POSTGRES_PORT: str = "5432"
+    SQLALCHEMY_DATABASE_URI: Optional[str] = None
 
     # File upload settings
     UPLOAD_DIR: str = "uploads"
@@ -19,8 +20,15 @@ class Settings(BaseSettings):
     ALLOWED_IMAGE_TYPES: list = ["image/jpeg", "image/png"]
     ALLOWED_DOC_TYPES: list = ["application/pdf"]
 
+    @property
+    def get_database_url(self) -> str:
+        if self.SQLALCHEMY_DATABASE_URI:
+            return self.SQLALCHEMY_DATABASE_URI
+        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}/{self.POSTGRES_DB}"
+
     class Config:
         env_file = ".env"
+        case_sensitive = True
 
 
 settings = Settings()

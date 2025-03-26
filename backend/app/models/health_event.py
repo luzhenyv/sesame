@@ -1,10 +1,17 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from typing import List, Optional
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum, Text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import ARRAY
+import enum
 
 from app.db.base_class import Base
+
+
+class EventType(str, enum.Enum):
+    CHECKUP = "checkup"
+    MEDICATION = "medication"
+    SYMPTOM = "symptom"
 
 
 class HealthEvent(Base):
@@ -12,17 +19,15 @@ class HealthEvent(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
-    event_type: Mapped[str] = mapped_column(
-        Enum("checkup", "medication", "symptom", name="event_type_enum"), nullable=False
-    )
+    event_type: Mapped[str] = mapped_column(Enum(EventType), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     date_time: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     family_member_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("family_members.id"), nullable=False
     )
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now(UTC))
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
+        DateTime, default=datetime.now(UTC), onupdate=datetime.now(UTC)
     )
 
     # File attachments

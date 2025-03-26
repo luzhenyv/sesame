@@ -1,7 +1,7 @@
 **command to run the backend**
 >> cd backend
 >> source venv/bin/activate
->> python manage.py runserver
+>> uvicorn app.main:app --reload
 
 **command to run the frontend**
 >> cd frontend

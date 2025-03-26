@@ -1,12 +1,21 @@
+import os
+import sys
+from pathlib import Path
+
+# Add the backend directory to the Python path
+backend_dir = Path(__file__).parent.parent
+sys.path.append(str(backend_dir))
+
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.main import app
-from app.database import Base, get_db
+from app.db.base import Base
+from app.db.session import get_db
 
 # Test database URL
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
+SQLALCHEMY_DATABASE_URL = "sqlite:///"
 
 # Create test database engine
 engine = create_engine(

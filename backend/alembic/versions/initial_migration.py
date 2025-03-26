@@ -20,7 +20,7 @@ depends_on = None
 def upgrade() -> None:
     # Create family_members table
     op.create_table(
-        "familymembers",
+        "family_members",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
         sa.Column("relationship", sa.String(length=50), nullable=False),
@@ -31,11 +31,11 @@ def upgrade() -> None:
         sa.Column("updated_at", sa.DateTime(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(op.f("ix_familymembers_id"), "familymembers", ["id"], unique=False)
+    op.create_index(op.f("ix_family_members_id"), "family_members", ["id"], unique=False)
 
     # Create health_events table
     op.create_table(
-        "healthevents",
+        "health_events",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column("title", sa.String(length=255), nullable=False),
         sa.Column("event_type", sa.String(length=50), nullable=False),
@@ -48,11 +48,11 @@ def upgrade() -> None:
         sa.Column("file_types", postgresql.ARRAY(sa.String()), nullable=True),
         sa.ForeignKeyConstraint(
             ["family_member_id"],
-            ["familymembers.id"],
+            ["family_members.id"],
         ),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(op.f("ix_healthevents_id"), "healthevents", ["id"], unique=False)
+    op.create_index(op.f("ix_health_events_id"), "health_events", ["id"], unique=False)
 
 
 def downgrade() -> None:

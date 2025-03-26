@@ -142,16 +142,21 @@
      - [x] Configure database connection
      - [x] Create initial health event model
      - [x] Set up environment configuration
-   - [ ] Configure PostgreSQL database and models
-   - [ ] Implement file upload endpoints:
-     - File type validation
-     - Multiple file handling
-     - File storage management
-   - [ ] Create CRUD API endpoints:
-     - Event creation
-     - Event retrieval (single/multiple)
-     - Event updates
-     - Event deletion
+   - [x] Configure PostgreSQL database and models
+     - [x] Set up PostgreSQL container in docker-compose.yml
+     - [x] Configure database credentials and environment variables
+     - [x] Set up Alembic for database migrations
+     - [x] Configure database connection in alembic.ini
+     - [x] Create initial app structure with models directory
+   - [x] Implement file upload endpoints:
+     - [x] File type validation
+     - [x] Multiple file handling
+     - [x] File storage management
+   - [x] Create CRUD API endpoints:
+     - [x] Event creation
+     - [x] Event retrieval (single/multiple)
+     - [x] Event updates
+     - [x] Event deletion
    - [ ] Implement filtering and pagination
    - [ ] Add voice input processing
    - [ ] (Future) Integrate AI content generation
