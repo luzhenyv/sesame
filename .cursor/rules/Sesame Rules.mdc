@@ -1,7 +1,7 @@
 ---
 description: 
 globs: 
-alwaysApply: false
+alwaysApply: true
 ---
 ## Project Structure
 
@@ -35,3 +35,5 @@ alwaysApply: false
 │       └── store/         # Redux store
 ├── database/               # Database migrations and schemas
 └── docs/                   # Project documentation
+
+

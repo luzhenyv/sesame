@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 
   You are an expert in Python, Flask, and scalable API development.
 
