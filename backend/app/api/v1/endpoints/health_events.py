@@ -1,13 +1,16 @@
-from typing import List
+from typing import List, Optional
 from datetime import datetime
-from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Query
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from app.db.session import get_db
 from app.schemas.health_event import (
     HealthEventCreate,
     HealthEventUpdate,
     HealthEventResponse,
     HealthEventInDB,
+    HealthEventFilter,
+    PaginatedResponse,
 )
 from app.models.health_event import HealthEvent, EventType
 from app.services.file_service import FileService
@@ -28,7 +31,7 @@ async def create_health_event(
     description: str = Form(None),
     family_member_id: int = Form(...),
     date_time: datetime = Form(...),
-    file: UploadFile = File(None)
+    file: UploadFile = File(None),
 ):
     """
     Create a new health event with optional file attachment.
@@ -72,16 +75,62 @@ async def create_health_event(
     return db_event
 
 
-@router.get("/", response_model=List[HealthEventResponse], summary="List health events")
-def get_health_events(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
+@router.get("/", response_model=PaginatedResponse, summary="List health events")
+def get_health_events(
+    db: Session = Depends(get_db),
+    page: int = Query(1, ge=1, description="Page number"),
+    size: int = Query(10, ge=1, le=100, description="Items per page"),
+    event_type: Optional[EventType] = Query(None, description="Filter by event type"),
+    family_member_id: Optional[int] = Query(
+        None, description="Filter by family member ID"
+    ),
+    start_date: Optional[datetime] = Query(None, description="Filter by start date"),
+    end_date: Optional[datetime] = Query(None, description="Filter by end date"),
+    search: Optional[str] = Query(None, description="Search in title and description"),
+):
     """
-    Get list of health events with pagination.
+    Get paginated list of health events with optional filtering.
 
-    - **skip**: Number of records to skip
-    - **limit**: Maximum number of records to return
+    - **page**: Page number (1-based)
+    - **size**: Number of items per page (1-100)
+    - **event_type**: Filter by event type
+    - **family_member_id**: Filter by family member ID
+    - **start_date**: Filter by start date
+    - **end_date**: Filter by end date
+    - **search**: Search in title and description
     """
-    events = db.query(HealthEvent).offset(skip).limit(limit).all()
-    return events
+    # Build query
+    query = db.query(HealthEvent)
+
+    # Apply filters
+    if event_type:
+        query = query.filter(HealthEvent.event_type == event_type)
+    if family_member_id:
+        query = query.filter(HealthEvent.family_member_id == family_member_id)
+    if start_date:
+        query = query.filter(HealthEvent.date_time >= start_date)
+    if end_date:
+        query = query.filter(HealthEvent.date_time <= end_date)
+    if search:
+        search_filter = or_(
+            HealthEvent.title.ilike(f"%{search}%"),
+            HealthEvent.description.ilike(f"%{search}%"),
+        )
+        query = query.filter(search_filter)
+
+    # Get total count
+    total = query.count()
+
+    # Calculate pagination
+    total_pages = (total + size - 1) // size
+    offset = (page - 1) * size
+
+    # Get paginated results
+    events = query.offset(offset).limit(size).all()
+
+    return PaginatedResponse(
+        items=events, total=total, page=page, size=size, pages=total_pages
+    )
 
 
 @router.get(
@@ -110,7 +159,7 @@ async def update_health_event(
     event_type: EventType = Form(None),
     description: str = Form(None),
     family_member_id: int = Form(None),
-    file: UploadFile = File(None)
+    file: UploadFile = File(None),
 ):
     """
     Update a health event and optionally its file attachment.

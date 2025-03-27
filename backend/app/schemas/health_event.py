@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel, Field
 from app.models.health_event import EventType
 
@@ -36,3 +36,19 @@ class HealthEventInDB(HealthEventBase):
 
 class HealthEventResponse(HealthEventInDB):
     file_url: Optional[str] = None
+
+
+class HealthEventFilter(BaseModel):
+    event_type: Optional[EventType] = None
+    family_member_id: Optional[int] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
+    search: Optional[str] = None
+
+
+class PaginatedResponse(BaseModel):
+    items: List[HealthEventResponse]
+    total: int
+    page: int
+    size: int
+    pages: int

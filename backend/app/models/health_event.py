@@ -1,11 +1,14 @@
 from datetime import datetime, UTC
-from typing import List, Optional
+from typing import List, Optional, TYPE_CHECKING
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum, Text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import ARRAY
 import enum
 
 from app.db.base_class import Base
+
+if TYPE_CHECKING:
+    from app.models.family_member import FamilyMember
 
 
 class EventType(str, enum.Enum):
@@ -35,6 +38,6 @@ class HealthEvent(Base):
     file_types: Mapped[List[str]] = mapped_column(ARRAY(String), nullable=True)
 
     # Relationships
-    family_member = relationship(
+    family_member: Mapped["FamilyMember"] = relationship(
         "FamilyMember", back_populates="health_events", lazy="selectin"
     )
