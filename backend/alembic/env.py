@@ -12,7 +12,7 @@ from sqlalchemy import pool
 from alembic import context
 from app.core.config import settings
 from app.db.base_class import Base
-from app.models import health_event, family_member  # Import all models here
+from app.models import health_event, family_member, user  # Import all models here
 
 config = context.config
 

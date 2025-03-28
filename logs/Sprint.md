@@ -148,6 +148,13 @@
      - [x] Set up Alembic for database migrations
      - [x] Configure database connection in alembic.ini
      - [x] Create initial app structure with models directory
+   - [x] Implement core data models
+     - [x] Create User model for authentication
+     - [x] Create FamilyMember model with member types
+     - [x] Create HealthEvent model with event types
+     - [x] Set up proper relationships between models
+     - [x] Add file attachment support
+     - [x] Implement proper timestamps and UUIDs
    - [x] Implement file upload endpoints:
      - [x] File type validation
      - [x] Multiple file handling
@@ -172,8 +179,9 @@
    - [ ] (Future) Integrate AI content generation
 
 2. Frontend UI Implementation
-   - HomePage.tsx:
-     - [ ] Add "Create Event" button
+   - FamilyPage.tsx:
+     - [x] Add "Create Event" button
+     - [ ] Add a modal for creating events
      - [ ] Implement event timeline view
      - [ ] Create event cards with previews
      - [ ] Add filtering components

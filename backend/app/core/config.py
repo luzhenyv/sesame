@@ -1,6 +1,8 @@
 from pydantic_settings import BaseSettings
 from typing import Optional
 
+from pathlib import Path
+
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Sesame Health"
@@ -15,6 +17,7 @@ class Settings(BaseSettings):
     SQLALCHEMY_DATABASE_URI: Optional[str] = None
 
     # File upload settings
+    ROOT_DIR: str = str(Path(__file__).parent.parent.parent)
     UPLOAD_DIR: str = "uploads"
     MAX_FILE_SIZE: int = 10 * 1024 * 1024  # 10MB
     ALLOWED_IMAGE_TYPES: list = ["image/jpeg", "image/png"]

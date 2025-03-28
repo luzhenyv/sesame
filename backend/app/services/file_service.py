@@ -5,10 +5,12 @@ from pathlib import Path
 from typing import List, Optional
 from fastapi import UploadFile
 
+from app.core.config import settings
+
 
 class FileService:
     def __init__(self):
-        self.base_path = Path("storage/uploads")
+        self.base_path = Path(settings.ROOT_DIR) / "storage" / "uploads"
         self.image_path = self.base_path / "images"
         self.pdf_path = self.base_path / "pdfs"
         self._ensure_directories()
@@ -66,3 +68,6 @@ class FileService:
     def get_file_url(self, file_path: str) -> str:
         """Generate a file URL for the stored file."""
         return f"/files/{os.path.basename(file_path)}"
+
+
+file_service = FileService()

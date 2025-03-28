@@ -1,4 +1,3 @@
-import os
 import sys
 from pathlib import Path
 
@@ -26,6 +25,7 @@ def db_session():
     yield session
     session.close()
 
+
 @pytest.fixture(scope="function")
 def client(db_session):
     def override_get_db():
@@ -33,12 +33,11 @@ def client(db_session):
             yield db_session
         finally:
             db_session.close()
-            
+
     app.dependency_overrides[get_db] = override_get_db
     with TestClient(app, base_url="http://127.0.0.1:8000") as test_client:
         yield test_client
     app.dependency_overrides.clear()
-
 
 
 @pytest.fixture

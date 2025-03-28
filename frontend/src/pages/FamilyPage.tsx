@@ -44,6 +44,7 @@ import {
   ExclamationCircleIcon
 } from '@heroicons/react/24/outline';
 import FamilyDashboard from '../components/FamilyDashboard.tsx';
+import CreateEventModal from '../components/CreateEventModal.tsx';
 
 // Types
 interface HealthScore {
@@ -134,6 +135,25 @@ const TimelineContainer = styled.div`
   padding: 1rem;
 `;
 
+const CreateEventButton = styled.button`
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s ease;
+  margin-left: auto;
+  
+  &:hover {
+    background-color: #2980b9;
+  }
+`;
+
 const FilterBar = styled.div`
   display: flex;
   gap: 1rem;
@@ -177,6 +197,7 @@ const FamilyPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState('month');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
   
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -200,6 +221,15 @@ const FamilyPage: React.FC = () => {
     console.log('Add member clicked');
   };
 
+  const handleCreateEvent = () => {
+    setIsCreateEventModalOpen(true);
+  };
+
+  const handleEventSubmit = (eventData: any) => {
+    // TODO: Implement event submission to backend
+    console.log('Event data:', eventData);
+  };
+
   return (
     <Container>
       <MainContent>
@@ -213,7 +243,12 @@ const FamilyPage: React.FC = () => {
 
         {/* Health Timeline Section */}
         <Section>
-          <SectionTitle>Health Timeline</SectionTitle>
+          <SectionTitle>
+            Health Timeline
+            <CreateEventButton onClick={handleCreateEvent}>
+              <span>+</span> Create Event
+            </CreateEventButton>
+          </SectionTitle>
           
           <FilterBar>
             <TextField
@@ -287,6 +322,13 @@ const FamilyPage: React.FC = () => {
             </Timeline>
           </TimelineContainer>
         </Section>
+
+        <CreateEventModal
+          open={isCreateEventModalOpen}
+          onClose={() => setIsCreateEventModalOpen(false)}
+          onSubmit={handleEventSubmit}
+          familyMembers={mockFamilyMembers}
+        />
       </MainContent>
     </Container>
   );
