@@ -32,5 +32,5 @@ class User(Base):
 
     # Relationships
     family_members: Mapped[List["FamilyMember"]] = relationship(
-        "FamilyMember", back_populates="manager"
+        "FamilyMember", back_populates="manager", lazy="selectin"
     )

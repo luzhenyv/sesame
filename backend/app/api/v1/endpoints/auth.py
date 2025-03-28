@@ -93,9 +93,6 @@ def register_user(user_in: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
 
-    # Time to sleep for 5 seconds
-    time.sleep(5)
-
     return db_user
 
 
@@ -121,9 +118,7 @@ async def login_for_access_token(
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
-    # Time to sleep for 2 seconds
-    time.sleep(2)
-
+    
     return {"access_token": access_token, "token_type": "bearer"}
 
 

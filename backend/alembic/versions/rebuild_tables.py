@@ -24,8 +24,6 @@ def upgrade() -> None:
     op.execute("DROP TABLE IF EXISTS health_events")
     op.execute("DROP TABLE IF EXISTS family_members")
     op.execute("DROP TABLE IF EXISTS users")
-    op.execute("DROP TYPE IF EXISTS eventtype")
-    op.execute("DROP TYPE IF EXISTS membertype")
 
     # Create users table
     op.create_table(
@@ -46,9 +44,7 @@ def upgrade() -> None:
         "family_members",
         sa.Column("id", postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
-        sa.Column(
-            "member_type", sa.Enum("HUMAN", "PET", name="membertype"), nullable=False
-        ),
+        sa.Column("member_type", sa.String(length=50), nullable=False),
         sa.Column("relation_type", sa.String(length=50), nullable=False),
         sa.Column("date_of_birth", sa.DateTime(), nullable=True),
         sa.Column("health_score", sa.Integer(), nullable=True),

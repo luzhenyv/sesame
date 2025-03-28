@@ -1,10 +1,11 @@
 from tests.integration.test_base import TestBase
+from app.core.config import settings
 
 
 class TestAuth(TestBase):
     def test_register_user(self):
         response = self.client.post(
-            "/auth/register",
+            f"{settings.API_V1_STR}/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "testpassword123",
@@ -20,7 +21,7 @@ class TestAuth(TestBase):
     def test_register_duplicate_user(self):
         # Register first user
         self.client.post(
-            "/auth/register",
+            f"{settings.API_V1_STR}/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "testpassword123",
@@ -30,7 +31,7 @@ class TestAuth(TestBase):
 
         # Try to register same email
         response = self.client.post(
-            "/auth/register",
+            f"{settings.API_V1_STR}/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "testpassword123",
@@ -43,7 +44,7 @@ class TestAuth(TestBase):
     def test_login(self):
         # Register user first
         self.client.post(
-            "/auth/register",
+            f"{settings.API_V1_STR}/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "testpassword123",
@@ -53,7 +54,7 @@ class TestAuth(TestBase):
 
         # Login
         response = self.client.post(
-            "/auth/token",
+            f"{settings.API_V1_STR}/auth/token",
             data={"username": "test@example.com", "password": "testpassword123"},
         )
         assert response.status_code == 200
@@ -63,7 +64,7 @@ class TestAuth(TestBase):
 
     def test_login_invalid_credentials(self):
         response = self.client.post(
-            "/auth/token",
+            f"{settings.API_V1_STR}/auth/token",
             data={"username": "wrong@example.com", "password": "wrongpassword"},
         )
         assert response.status_code == 401
@@ -72,7 +73,7 @@ class TestAuth(TestBase):
     def test_logout(self):
         # Register and login first
         self.client.post(
-            "/auth/register",
+            f"{settings.API_V1_STR}/auth/register",
             json={
                 "email": "test@example.com",
                 "password": "testpassword123",
@@ -81,14 +82,15 @@ class TestAuth(TestBase):
         )
 
         login_response = self.client.post(
-            "/auth/token",
+            f"{settings.API_V1_STR}/auth/token",
             data={"username": "test@example.com", "password": "testpassword123"},
         )
         token = login_response.json()["access_token"]
 
         # Test logout
         response = self.client.post(
-            "/auth/logout", headers={"Authorization": f"Bearer {token}"}
+            f"{settings.API_V1_STR}/auth/logout",
+            headers={"Authorization": f"Bearer {token}"},
         )
         assert response.status_code == 200
         assert response.json()["message"] == "Successfully logged out"
