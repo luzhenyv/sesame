@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Optional, List
 from pydantic import BaseModel, Field
 from app.models.health_event import EventType
+from uuid import UUID
 
 
 class HealthEventBase(BaseModel):
@@ -9,11 +10,11 @@ class HealthEventBase(BaseModel):
     event_type: EventType
     description: Optional[str] = None
     date_time: datetime = Field(default_factory=datetime.utcnow)
-    family_member_id: int
+    family_member_id: UUID
 
 
 class HealthEventCreate(HealthEventBase):
-    pass
+    created_by_id: UUID
 
 
 class HealthEventUpdate(HealthEventBase):
@@ -21,12 +22,13 @@ class HealthEventUpdate(HealthEventBase):
     event_type: Optional[EventType] = None
     description: Optional[str] = None
     date_time: Optional[datetime] = None
-    family_member_id: Optional[int] = None
+    family_member_id: Optional[UUID] = None
 
 
 class HealthEventInDB(HealthEventBase):
-    id: int
-    file_path: Optional[str] = None
+    id: UUID
+    file_paths: Optional[List[str]] = None
+    file_types: Optional[List[str]] = None
     created_at: datetime
     updated_at: datetime
 
@@ -35,12 +37,12 @@ class HealthEventInDB(HealthEventBase):
 
 
 class HealthEventResponse(HealthEventInDB):
-    file_url: Optional[str] = None
+    file_urls: Optional[List[str]] = None
 
 
 class HealthEventFilter(BaseModel):
     event_type: Optional[EventType] = None
-    family_member_id: Optional[int] = None
+    family_member_id: Optional[UUID] = None
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
     search: Optional[str] = None

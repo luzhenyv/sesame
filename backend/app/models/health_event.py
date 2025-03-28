@@ -26,7 +26,7 @@ class HealthEvent(Base):
         UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     title: Mapped[str] = mapped_column(String(255), nullable=False)
-    event_type: Mapped[str] = mapped_column(Enum(EventType), nullable=False)
+    event_type: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     date_time: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     family_member_id: Mapped[UUID] = mapped_column(

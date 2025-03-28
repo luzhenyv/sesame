@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, UTC
+from datetime import datetime, time, timedelta, UTC
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -16,7 +16,7 @@ router = APIRouter()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # OAuth2 scheme
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=f"{settings.API_V1_STR}/auth/token")
 
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -93,6 +93,9 @@ def register_user(user_in: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
 
+    # Time to sleep for 5 seconds
+    time.sleep(5)
+
     return db_user
 
 
@@ -118,6 +121,9 @@ async def login_for_access_token(
     access_token = create_access_token(
         data={"sub": user.email}, expires_delta=access_token_expires
     )
+    # Time to sleep for 2 seconds
+    time.sleep(2)
+
     return {"access_token": access_token, "token_type": "bearer"}
 
 
@@ -126,5 +132,13 @@ async def logout(current_user: User = Depends(get_current_user)):
     """
     Logout the current user.
     """
-    # In a stateless JWT setup, the client should remove the token
+
     return {"message": "Successfully logged out"}
+
+
+@router.get("/me", response_model=UserResponse)
+async def get_current_user_info(current_user: User = Depends(get_current_user)):
+    """
+    Get current user information.
+    """
+    return current_user

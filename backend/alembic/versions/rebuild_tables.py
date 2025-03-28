@@ -68,11 +68,7 @@ def upgrade() -> None:
         "health_events",
         sa.Column("id", postgresql.UUID(as_uuid=True), nullable=False),
         sa.Column("title", sa.String(length=255), nullable=False),
-        sa.Column(
-            "event_type",
-            sa.Enum("CHECKUP", "MEDICATION", "SYMPTOM", name="eventtype"),
-            nullable=False,
-        ),
+        sa.Column("event_type", sa.String(length=255), nullable=False),
         sa.Column("description", sa.Text(), nullable=True),
         sa.Column("date_time", sa.DateTime(), nullable=False),
         sa.Column("family_member_id", postgresql.UUID(as_uuid=True), nullable=False),
@@ -95,7 +91,8 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     # Drop tables in reverse order
-    op.drop_table("health_events")
+    if op.get_bind().dialect.has_table(op.get_bind(), "health_events"):
+        op.drop_table("health_events")
     op.drop_table("family_members")
     op.drop_index(op.f("ix_users_email"), table_name="users")
     op.drop_table("users")

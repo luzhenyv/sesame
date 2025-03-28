@@ -16,7 +16,7 @@ from app.schemas.health_event import (
 from app.models.health_event import HealthEvent, EventType
 from app.models.user import User
 from app.services.file_service import file_service
-from app.api.deps import get_current_user
+from app.api.v1.endpoints.auth import get_current_user
 
 router = APIRouter()
 
@@ -45,18 +45,29 @@ async def create_health_event(
     - **date_time**: Date and time of the event
     - **files**: Optional file attachments (images or PDFs)
     """
+    # Validate file types before creating the event
+    if files:
+        for file in files:
+            file_extension = file_service._get_file_extension(file.filename)
+            if not file_service._is_valid_file_type(file_extension):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Invalid file type: {file_extension}. Only images (jpg, jpeg, png, gif) and PDFs are allowed.",
+                )
+
     # Create health event in database
-    event_data = HealthEventCreate(
+    db_event = HealthEvent(
         title=title,
         event_type=event_type,
         description=description,
         family_member_id=family_member_id,
         created_by_id=current_user.id,
         date_time=date_time,
+        file_paths=[],  # Initialize empty lists for files
+        file_types=[],
     )
 
     try:
-        db_event = HealthEvent(**event_data.model_dump())
         db.add(db_event)
         db.commit()
         db.refresh(db_event)
