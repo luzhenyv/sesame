@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.models.user import User
 from app.models.family_member import FamilyMember, MemberType
+from app.models.health_event import HealthEvent
 from app.api.v1.endpoints.auth import get_password_hash
 
 
@@ -126,12 +127,72 @@ def create_fake_family_members(db: Session, users: List[User]) -> List[FamilyMem
     return members
 
 
-def seed_database(db: Session):
+def create_fake_health_events(
+    db: Session, members: List[FamilyMember], users: List[User]
+) -> List[HealthEvent]:
+    events = []
+
+    for member in members:
+        # Find the corresponding user (manager) for this member
+        manager = next(user for user in users if user.id == member.manager_id)
+
+        # Create 2-3 events for each member
+        num_events = random.randint(2, 3)
+
+        for _ in range(num_events):
+            # Randomly select event type
+            event_type = random.choice(["CHECKUP", "MEDICATION", "SYMPTOM"])
+
+            # Generate random date within last 6 months
+            days_ago = random.randint(0, 180)
+            event_date = datetime.utcnow() - timedelta(days=days_ago)
+
+            # Create event with appropriate details based on type
+            if event_type == "CHECKUP":
+                title = f"Regular Health Checkup"
+                description = f"Routine health checkup for {member.name}"
+            elif event_type == "MEDICATION":
+                title = f"Medication Update"
+                description = f"Updated medication schedule for {member.name}"
+            else:  # SYMPTOM
+                title = f"Health Symptom Report"
+                description = f"Reported health symptoms for {member.name}"
+
+            event = HealthEvent(
+                title=title,
+                event_type=event_type,
+                description=description,
+                date_time=event_date,
+                family_member_id=member.id,
+                created_by_id=manager.id,
+                file_paths=[],
+                file_types=[],
+            )
+            events.append(event)
+
+    for event in events:
+        db.add(event)
+    db.commit()
+    return events
+
+
+def seed_database(db: Session, if_append: bool = False):
     """Seed the database with fake data"""
+    if not if_append:
+        print("Clearing existing data...")
+        # Delete in correct order to respect foreign key constraints
+        db.query(HealthEvent).delete()
+        db.query(FamilyMember).delete()
+        db.query(User).delete()
+        db.commit()
+
     print("Creating fake users...")
     users = create_fake_users(db)
 
     print("Creating fake family members...")
     members = create_fake_family_members(db, users)
+
+    print("Creating fake health events...")
+    events = create_fake_health_events(db, members, users)
 
     print("Database seeding completed successfully!")

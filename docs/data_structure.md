@@ -7,40 +7,40 @@ This document describes the core data structure of the Sesame Health Management 
 
 ### User
 The primary user who manages family health information.
-- `id`: UUID (Primary Key)
-- `email`: String (Unique)
-- `hashed_password`: String
-- `full_name`: String
-- `is_active`: Boolean
-- `created_at`: DateTime
-- `updated_at`: DateTime
+- `id`: UUID (Primary Key, auto-generated)
+- `email`: String(255) (Unique, Indexed)
+- `hashed_password`: String(255)
+- `full_name`: String(255)
+- `is_active`: Boolean (Default: True)
+- `created_at`: DateTime (UTC, auto-generated)
+- `updated_at`: DateTime (UTC, auto-updated)
 
 ### FamilyMember
 Represents a family member (human or pet) whose health is being tracked.
-- `id`: UUID (Primary Key)
-- `name`: String
+- `id`: UUID (Primary Key, auto-generated)
+- `name`: String(255)
 - `member_type`: Enum (HUMAN/PET)
-- `relation_type`: String
+- `relation_type`: String(50)
 - `date_of_birth`: DateTime (Optional)
 - `health_score`: Integer (Optional)
 - `notes`: Text (Optional)
-- `created_at`: DateTime
-- `updated_at`: DateTime
+- `created_at`: DateTime (UTC, auto-generated)
+- `updated_at`: DateTime (UTC, auto-updated)
 - `manager_id`: UUID (Foreign Key to User)
 
 ### HealthEvent
 Represents a health-related event for a family member.
-- `id`: UUID (Primary Key)
-- `title`: String
-- `event_type`: Enum (CHECKUP/MEDICATION/SYMPTOM)
+- `id`: UUID (Primary Key, auto-generated)
+- `title`: String(255)
+- `event_type`: String(255) (Enum: CHECKUP/MEDICATION/SYMPTOM)
 - `description`: Text (Optional)
 - `date_time`: DateTime
 - `family_member_id`: UUID (Foreign Key to FamilyMember)
 - `created_by_id`: UUID (Foreign Key to User)
-- `created_at`: DateTime
-- `updated_at`: DateTime
-- `file_paths`: String Array (Optional)
-- `file_types`: String Array (Optional)
+- `created_at`: DateTime (UTC, auto-generated)
+- `updated_at`: DateTime (UTC, auto-updated)
+- `file_paths`: String[] (Optional)
+- `file_types`: String[] (Optional)
 
 ## Model Relationships
 
@@ -52,7 +52,7 @@ erDiagram
 
     User {
         UUID id PK
-        string email
+        string email UK
         string hashed_password
         string full_name
         boolean is_active
@@ -76,7 +76,7 @@ erDiagram
     HealthEvent {
         UUID id PK
         string title
-        enum event_type
+        string event_type
         text description
         datetime date_time
         UUID family_member_id FK
@@ -94,16 +94,30 @@ erDiagram
    - One-to-Many relationship
    - A user can manage multiple family members
    - Each family member belongs to one user (manager)
+   - Relationship is lazy-loaded with selectin strategy
+   - Implemented using SQLAlchemy's relationship with back_populates
 
 2. User to HealthEvent:
    - One-to-Many relationship
    - A user can create multiple health events
    - Each health event is created by one user
+   - Relationship is implemented using backref
+   - Allows easy access to created events from user object
 
 3. FamilyMember to HealthEvent:
    - One-to-Many relationship
    - A family member can have multiple health events
    - Each health event belongs to one family member
+   - Relationship is lazy-loaded with selectin strategy
+   - Implemented using SQLAlchemy's relationship with back_populates
+
+## Technical Details
+
+1. All timestamps are stored in UTC
+2. UUIDs are used for all primary and foreign keys
+3. String fields have specific length constraints
+4. Relationships use SQLAlchemy's modern typing system with Mapped types
+5. File attachments are stored as arrays of strings for paths and types
 
 ## Future Extensibility
 
@@ -122,4 +136,4 @@ The current data structure is designed to be extensible for future features:
 3. Additional Features:
    - Can add more event types
    - Can extend file attachment support
-   - Can add more health metrics and tracking 
+   - Can add more health metrics and tracking

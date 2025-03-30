@@ -166,13 +166,6 @@ const FilterBar = styled.div`
 `;
 
 // Mock Data
-const mockPersonalScores: HealthScore[] = [
-  { category: 'Physical Health', score: 85, status: 'good' },
-  { category: 'Mental Health', score: 75, status: 'warning' },
-  { category: 'Lifestyle Habits', score: 90, status: 'good' },
-  { category: 'Medical Indicators', score: 70, status: 'attention' },
-];
-
 const mockFamilyMembers: FamilyMember[] = [
   { id: '1', name: 'John (You)', role: 'self', avatar: '👨', healthScore: 80, riskLevel: 'low' },
   { id: '2', name: 'Sarah', role: 'spouse', avatar: '👩', healthScore: 85, riskLevel: 'low' },
