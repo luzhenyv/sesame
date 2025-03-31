@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Avatar,
+  Menu,
+  MenuItem,
+  IconButton,
+  Box,
+} from '@mui/material';
+import { useAuth } from '../context/AuthContext.tsx';
 
 const HeaderContainer = styled.header`
   background-color: white;
@@ -10,6 +18,9 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
   @media (max-width: 768px) {
     padding: 1rem;
@@ -29,6 +40,7 @@ const Logo = styled.h1`
 const Nav = styled.nav`
   display: flex;
   gap: 2rem;
+  align-items: center;
 
   a {
     color: #4a4a4a;
@@ -57,6 +69,27 @@ const Nav = styled.nav`
 
 const Header: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+    handleClose();
+  };
 
   return (
     <HeaderContainer>
@@ -67,12 +100,51 @@ const Header: React.FC = () => {
         <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
           Home
         </Link>
-        <Link to="/family" className={location.pathname === '/family' ? 'active' : ''}>
-          Family
-        </Link>
-        <Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>
-          Profile
-        </Link>
+        
+        {isAuthenticated ? (
+          <>
+            <Link to="/family" className={location.pathname === '/family' ? 'active' : ''}>
+              Family
+            </Link>
+            <Link to="/profile" className={location.pathname === '/profile' ? 'active' : ''}>
+              Profile
+            </Link>
+            <Box>
+              <IconButton
+                onClick={handleMenu}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={Boolean(anchorEl) ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={Boolean(anchorEl) ? 'true' : undefined}
+              >
+                <Avatar sx={{ width: 32, height: 32 }}>
+                  {user?.name?.[0] || 'U'}
+                </Avatar>
+              </IconButton>
+              <Menu
+                id="account-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                onClick={handleClose}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
+                <MenuItem onClick={() => { navigate('/profile'); handleClose(); }}>
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+            </Box>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className={location.pathname === '/login' ? 'active' : ''}>
+              Login
+            </Link>
+          </>
+        )}
       </Nav>
     </HeaderContainer>
   );

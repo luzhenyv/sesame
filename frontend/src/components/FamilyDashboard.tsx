@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   Card,
   Typography,
   Button,
-  Avatar,
   Box,
   Grid,
   LinearProgress,
-  Tooltip
+  Tooltip,
+  CircularProgress,
 } from '@mui/material';
 import { PlusIcon } from '@heroicons/react/24/outline';
 
@@ -16,16 +16,9 @@ import { PlusIcon } from '@heroicons/react/24/outline';
 interface FamilyMember {
   id: string;
   name: string;
-  role: string;
-  avatar: string;
-  healthScore: number;
-}
-
-interface FamilyDashboardProps {
-  familyScore: number;
-  memberCount: number;
-  members: FamilyMember[];
-  onAddMember: () => void;
+  relation_type: string;
+  health_score: number;
+  avatar?: string;
 }
 
 // Styled Components
@@ -87,6 +80,7 @@ const MemberCard = styled(Card)`
   align-items: center;
   gap: 0.5rem;
   transition: transform 0.2s;
+  height: 200px;
   
   &:hover {
     transform: translateY(-4px);
@@ -94,13 +88,36 @@ const MemberCard = styled(Card)`
 `;
 
 const AddMemberCard = styled(MemberCard)`
-  border: 2px dashed #ccc;
-  background-color: #f9f9f9;
+  border: 1px dashed #ddd;
+  background-color: #fafafa;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  
+  .plus-icon {
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .add-member-text {
+    opacity: 0;
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+    text-align: center;
+  }
   
   &:hover {
-    border-color: #999;
-    background-color: #f0f0f0;
+    border-color: #ccc;
+    background-color: white;
+    
+    .add-member-text {
+      opacity: 1;
+    }
+    
+    .plus-icon {
+      opacity: 0;
+    }
   }
 `;
 
@@ -110,14 +127,79 @@ const getHealthScoreColor = (score: number) => {
   return '#F44336'; // Attention
 };
 
-// A test return
+const getDefaultAvatar = (relationType: string): string => {
+  const avatars: { [key: string]: string } = {
+    'self': '👤',
+    'wife': '👩',
+    'husband': '👨',
+    'child': '👶',
+    'son': '👦',
+    'daughter': '👧',
+    'grandfather': '👴',
+    'grandmother': '👵',
+    'father': '👨',
+    'mother': '👩',
+    'dog': '🐶',
+    'cat': '🐱',
+    'other': '👤',
+  };
+  return avatars[relationType.toLowerCase()] || '👤';
+};
 
-const FamilyDashboard: React.FC<FamilyDashboardProps> = ({
-  familyScore,
-  memberCount,
-  members,
-  onAddMember
-}) => {
+const FamilyDashboard: React.FC = () => {
+  const [members, setMembers] = useState<FamilyMember[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchFamilyMembers = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/v1/family-members', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch family members');
+        }
+
+        const data = await response.json();
+        console.log('API Response:', data);
+        // Extract the items array from the paginated response
+        const familyMembers = data.items || [];
+        setMembers(familyMembers);
+      } catch (err) {
+        setError('Failed to load family members');
+        console.error('Error fetching family members:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFamilyMembers();
+  }, []);
+
+  const familyScore = members.length > 0
+    ? Math.round(members.reduce((acc, member) => acc + member.health_score, 0) / members.length)
+    : 0;
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ p: 2, textAlign: 'center' }}>
+        <Typography color="error">{error}</Typography>
+      </Box>
+    );
+  }
+
   return (
     <DashboardContainer 
       elevation={2} 
@@ -136,7 +218,7 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({
               Family Health Score
             </Typography>
             <Typography variant="h6">
-              {memberCount} family members
+              {members.length} family members
             </Typography>
           </div>
           
@@ -156,24 +238,24 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({
           <Grid item xs={12} sm={6} md={3} key={member.id}>
             <MemberCard elevation={2}>
               <Typography variant="h1" sx={{ fontSize: '2.5rem' }}>
-                {member.avatar}
+                {member.avatar || getDefaultAvatar(member.relation_type)}
               </Typography>
               <Typography variant="h6">{member.name}</Typography>
               <Typography variant="body2" color="textSecondary">
-                {member.role}
+                {member.relation_type}
               </Typography>
               
-              <Tooltip title={`Health Score: ${member.healthScore}/100`}>
+              <Tooltip title={`Health Score: ${member.health_score}/100`}>
                 <Box sx={{ width: '100%', mt: 1 }}>
                   <LinearProgress
                     variant="determinate"
-                    value={member.healthScore}
+                    value={member.health_score}
                     sx={{
                       height: 8,
                       borderRadius: 4,
                       backgroundColor: '#e0e0e0',
                       '& .MuiLinearProgress-bar': {
-                        backgroundColor: getHealthScoreColor(member.healthScore)
+                        backgroundColor: getHealthScoreColor(member.health_score)
                       }
                     }}
                   />
@@ -184,22 +266,26 @@ const FamilyDashboard: React.FC<FamilyDashboardProps> = ({
         ))}
         
         <Grid item xs={12} sm={6} md={3}>
-          <AddMemberCard elevation={1} onClick={onAddMember}>
-            <Box sx={{ 
+          <AddMemberCard elevation={1}>
+            <Box className="plus-icon" sx={{ 
               width: 60, 
               height: 60, 
               borderRadius: '50%', 
-              bgcolor: '#f0f0f0', 
+              bgcolor: '#f8f8f8', 
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
             }}>
-              <PlusIcon width={30} height={30} color="#666" />
+              <PlusIcon width={36} height={36} color="#999" />
             </Box>
-            <Typography variant="h6">Add Family Member</Typography>
-            <Typography variant="body2" color="textSecondary">
-              Track health together
-            </Typography>
+            <Box className="add-member-text">
+              <Typography variant="h6" sx={{ fontSize: '1.1rem', mb: 0.5 }}>
+                Add Family Member
+              </Typography>
+              <Typography variant="body2" color="textSecondary" sx={{ fontSize: '0.85rem' }}>
+                Track health together
+              </Typography>
+            </Box>
           </AddMemberCard>
         </Grid>
       </MembersGrid>

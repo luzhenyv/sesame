@@ -201,14 +201,6 @@ const FamilyPage: React.FC = () => {
     }
   };
 
-  // Mock data for the dashboard
-  const familyMembers = [
-    { id: '1', name: 'Dad', role: 'father', avatar: '😊', healthScore: 92 },
-    { id: '2', name: 'Mom', role: 'mother', avatar: '👩', healthScore: 88 },
-    { id: '3', name: 'Son', role: 'son', avatar: '👦', healthScore: 75 },
-    { id: '4', name: 'Daughter', role: 'daughter', avatar: '👧', healthScore: 65 },
-  ];
-
   const handleAddMember = () => {
     // Implement add member functionality
     console.log('Add member clicked');
@@ -226,13 +218,7 @@ const FamilyPage: React.FC = () => {
   return (
     <Container>
       <MainContent>
-        {/* Replace the old sections with the new dashboard */}
-        <FamilyDashboard
-          familyScore={85}
-          memberCount={familyMembers.length}
-          members={familyMembers}
-          onAddMember={handleAddMember}
-        />
+        <FamilyDashboard />
 
         {/* Health Timeline Section */}
         <Section>
