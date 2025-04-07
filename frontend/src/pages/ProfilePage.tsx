@@ -228,10 +228,10 @@ const CalendarDay = styled.div<{ isToday?: boolean; hasEvents?: boolean; eventTy
       height: 6px;
       border-radius: 50%;
       background-color: ${
-        props.eventType === 'checkup' ? '#4caf50' : 
-        props.eventType === 'medication' ? '#ff9800' : 
-        props.eventType === 'symptom' ? '#f44336' : 
-        props.eventType === 'exercise' ? '#9c27b0' : '#3498db'
+        props.eventType === 'CHECKUP' ? '#4caf50' : 
+        props.eventType === 'MEDICATION' ? '#ff9800' : 
+        props.eventType === 'SYMPTOM' ? '#f44336' : 
+        props.eventType === 'EXERCISE' ? '#9c27b0' : '#3498db'
       };
     }
   `}
@@ -462,7 +462,7 @@ const ProfilePage: React.FC = () => {
     isCurrentMonth: i > 2 && i < 33,
     isToday: i === 15,
     hasEvents: [5, 10, 15, 20, 25].includes(i),
-    eventType: i === 5 ? 'checkup' : i === 10 ? 'medication' : i === 15 ? 'symptom' : i === 20 ? 'exercise' : 'other'
+    eventType: i === 5 ? 'CHECKUP' : i === 10 ? 'MEDICATION' : i === 15 ? 'SYMPTOM' : i === 20 ? 'EXERCISE' : 'OTHER'
   }));
 
   return (

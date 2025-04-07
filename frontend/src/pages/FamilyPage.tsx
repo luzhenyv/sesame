@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   BarChart,
@@ -45,6 +45,7 @@ import {
 } from '@heroicons/react/24/outline';
 import FamilyDashboard from '../components/FamilyDashboard.tsx';
 import CreateEventModal from '../components/CreateEventModal.tsx';
+import HealthTimeline from '../components/HealthTimeline.tsx';
 
 // Types
 interface HealthScore {
@@ -64,12 +65,13 @@ interface FamilyMember {
 
 interface HealthEvent {
   id: string;
-  date: string;
-  type: 'checkup' | 'medication' | 'symptom' | 'other';
   title: string;
+  event_type: 'CHECKUP' | 'MEDICATION' | 'SYMPTOM';
   description: string;
-  familyMember: string;
-  attachments?: string[];
+  date_time: string;
+  file_paths: string[];
+  file_types: string[];
+  family_member: string;
 }
 
 // Styled Components
@@ -176,12 +178,13 @@ const mockFamilyMembers: FamilyMember[] = [
 const mockHealthEvents: HealthEvent[] = [
   {
     id: '1',
-    date: '2024-03-15',
-    type: 'checkup',
     title: 'Annual Physical',
+    event_type: 'CHECKUP',
     description: 'Regular checkup with Dr. Smith',
-    familyMember: 'John',
-    attachments: ['report.pdf']
+    date_time: '2024-03-15',
+    file_paths: ['report.pdf'],
+    file_types: ['pdf'],
+    family_member: 'John'
   },
   // Add more mock events as needed
 ];
@@ -191,28 +194,61 @@ const FamilyPage: React.FC = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreateEventModalOpen, setIsCreateEventModalOpen] = useState(false);
+  const [healthEvents, setHealthEvents] = useState<HealthEvent[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
   
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'good': return '#4CAF50';
-      case 'warning': return '#FFC107';
-      case 'attention': return '#F44336';
-      default: return '#666666';
+  const fetchHealthEvents = async (pageNum: number) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/v1/health-events?page=${pageNum}&per_page=5`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+        },
+      });
+      
+      if (!response.ok) throw new Error('Failed to fetch health events');
+      
+      const data = await response.json();
+      if (pageNum === 1) {
+        setHealthEvents(data.items);
+      } else {
+        setHealthEvents(prev => [...prev, ...data.items]);
+      }
+      setHasMore(data.items.length === 5);
+    } catch (error) {
+      console.error('Error fetching health events:', error);
     }
   };
 
-  const handleAddMember = () => {
-    // Implement add member functionality
-    console.log('Add member clicked');
+  useEffect(() => {
+    fetchHealthEvents(1);
+  }, []);
+
+  const handleLoadMore = async () => {
+    const nextPage = page + 1;
+    await fetchHealthEvents(nextPage);
+    setPage(nextPage);
   };
 
-  const handleCreateEvent = () => {
-    setIsCreateEventModalOpen(true);
-  };
+  const handleEventSubmit = async (eventData: any) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/v1/health-events', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData),
+      });
 
-  const handleEventSubmit = (eventData: any) => {
-    // TODO: Implement event submission to backend
-    console.log('Event data:', eventData);
+      if (!response.ok) throw new Error('Failed to create event');
+
+      // Refresh the events list
+      setPage(1);
+      await fetchHealthEvents(1);
+    } catch (error) {
+      console.error('Error creating event:', error);
+    }
   };
 
   return (
@@ -224,7 +260,7 @@ const FamilyPage: React.FC = () => {
         <Section>
           <SectionTitle>
             Health Timeline
-            <CreateEventButton onClick={handleCreateEvent}>
+            <CreateEventButton onClick={() => setIsCreateEventModalOpen(true)}>
               <span>+</span> Create Event
             </CreateEventButton>
           </SectionTitle>
@@ -234,7 +270,7 @@ const FamilyPage: React.FC = () => {
               placeholder="Search events..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              inputProps={{
+              InputProps={{
                 startAdornment: <MagnifyingGlassIcon width={20} />,
               }}
             />
@@ -248,65 +284,30 @@ const FamilyPage: React.FC = () => {
                 renderValue={(selected) => (
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
                     {selected.map((value) => (
-                      <Chip key={value} label={value} />
+                      <Typography key={value} component="span" sx={{ mr: 0.5 }}>
+                        {value}
+                      </Typography>
                     ))}
                   </Box>
                 )}
               >
-                {mockFamilyMembers.map(member => (
-                  <MenuItem key={member.id} value={member.name}>
-                    {member.name}
-                  </MenuItem>
-                ))}
+                {/* Add family member options here */}
               </Select>
             </FormControl>
           </FilterBar>
 
-          <TimelineContainer>
-            <Timeline>
-              {mockHealthEvents.map((event) => (
-                <TimelineItem key={event.id}>
-                  <TimelineSeparator>
-                    <TimelineDot color={
-                      event.type === 'checkup' ? 'primary' :
-                      event.type === 'medication' ? 'secondary' :
-                      event.type === 'symptom' ? 'error' : 'grey'
-                    } />
-                    <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent>
-                    <Typography variant="h6" component="span">
-                      {event.title}
-                    </Typography>
-                    <Typography color="textSecondary">
-                      {new Date(event.date).toLocaleDateString()}
-                    </Typography>
-                    <Typography>{event.description}</Typography>
-                    {event.attachments && (
-                      <Box sx={{ mt: 1 }}>
-                        {event.attachments.map(attachment => (
-                          <Chip
-                            key={attachment}
-                            icon={<DocumentIcon width={16} />}
-                            label={attachment}
-                            size="small"
-                            sx={{ mr: 1 }}
-                          />
-                        ))}
-                      </Box>
-                    )}
-                  </TimelineContent>
-                </TimelineItem>
-              ))}
-            </Timeline>
-          </TimelineContainer>
+          <HealthTimeline
+            events={healthEvents}
+            onLoadMore={handleLoadMore}
+            hasMore={hasMore}
+          />
         </Section>
 
         <CreateEventModal
           open={isCreateEventModalOpen}
           onClose={() => setIsCreateEventModalOpen(false)}
           onSubmit={handleEventSubmit}
-          familyMembers={mockFamilyMembers}
+          familyMembers={[]} // Add your family members data here
         />
       </MainContent>
     </Container>

@@ -42,7 +42,7 @@ def upgrade() -> None:
         sa.Column("title", sa.String(length=255), nullable=False),
         sa.Column(
             "event_type",
-            sa.Enum("checkup", "medication", "symptom", name="eventtype"),
+            sa.Enum("CHECKUP", "MEDICATION", "SYMPTOM", name="eventtype"),
             nullable=False,
         ),
         sa.Column("description", sa.Text(), nullable=True),

@@ -404,7 +404,7 @@ class TestHealthEvents(TestBase):
         start_date = datetime(2024, 1, 1, 0, 0).isoformat()
         end_date = datetime(2024, 1, 1, 12, 0).isoformat()
         response = client.get(
-            f"/api/v1/health-events/?event_type=checkup&start_date={start_date}&end_date={end_date}",
+            f"/api/v1/health-events/?event_type=CHECKUP&start_date={start_date}&end_date={end_date}",
             headers=headers,
         )
         assert response.status_code == 200

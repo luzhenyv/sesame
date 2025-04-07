@@ -80,10 +80,10 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
 }) => {
   const [formData, setFormData] = useState({
     title: '',
-    type: '',
+    event_type: '',
     description: '',
-    familyMember: '',
-    date: '',
+    family_member_id: '',
+    date_time: '',
     files: [] as File[]
   });
 
@@ -94,7 +94,12 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
 
   const handleSelectChange = (e: SelectChangeEvent) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const fieldMap: { [key: string]: string } = {
+      type: 'event_type',
+      familyMember: 'family_member_id'
+    };
+    const fieldName = fieldMap[name] || name;
+    setFormData(prev => ({ ...prev, [fieldName]: value }));
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +126,11 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+    const eventData = {
+      ...formData,
+      date_time: new Date(formData.date_time).toISOString(),
+    };
+    onSubmit(eventData);
     onClose();
   };
 
@@ -156,14 +165,13 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
             <InputLabel>Event Type</InputLabel>
             <Select
               name="type"
-              value={formData.type}
+              value={formData.event_type}
               onChange={handleSelectChange}
               label="Event Type"
             >
-              <MenuItem value="checkup">Checkup</MenuItem>
-              <MenuItem value="medication">Medication</MenuItem>
-              <MenuItem value="symptom">Symptom</MenuItem>
-              <MenuItem value="other">Other</MenuItem>
+              <MenuItem value="CHECKUP">CHECKUP</MenuItem>
+              <MenuItem value="MEDICATION">MEDICATION</MenuItem>
+              <MenuItem value="SYMPTOM">SYMPTOM</MenuItem>
             </Select>
           </FormControl>
 
@@ -171,7 +179,7 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
             <InputLabel>Family Member</InputLabel>
             <Select
               name="familyMember"
-              value={formData.familyMember}
+              value={formData.family_member_id}
               onChange={handleSelectChange}
               label="Family Member"
             >
@@ -188,8 +196,8 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
             fullWidth
             type="datetime-local"
             label="Date & Time"
-            name="date"
-            value={formData.date}
+            name="date_time"
+            value={formData.date_time}
             onChange={handleTextChange}
             InputLabelProps={{ shrink: true }}
           />
@@ -260,7 +268,7 @@ const CreateEventModal: React.FC<CreateEventModalProps> = ({
             type="submit"
             variant="contained"
             color="primary"
-            disabled={!formData.title || !formData.type || !formData.familyMember || !formData.date || !formData.description}
+            disabled={!formData.title || !formData.event_type || !formData.family_member_id || !formData.date_time || !formData.description}
           >
             Create Event
           </Button>

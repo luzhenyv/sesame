@@ -14,9 +14,9 @@ if TYPE_CHECKING:
 
 
 class EventType(str, enum.Enum):
-    CHECKUP = "checkup"
-    MEDICATION = "medication"
-    SYMPTOM = "symptom"
+    CHECKUP = "CHECKUP"
+    MEDICATION = "MEDICATION"
+    SYMPTOM = "SYMPTOM"
 
 
 class HealthEvent(Base):
